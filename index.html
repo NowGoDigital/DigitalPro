@@ -1,1 +1,2241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL PRO - Jasa Pembuatan Website Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C3CE1;
+            --primary-light: #8B5CF6;
+            --primary-dark: #5228CC;
+            --accent: #00D4AA;
+            --accent-light: #34EDCA;
+            --dark: #0A0A1A;
+            --dark-2: #12122A;
+            --dark-3: #1A1A3E;
+            --dark-4: #252552;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --white: #FFFFFF;
+            --gradient-1: linear-gradient(135deg, #6C3CE1 0%, #00D4AA 100%);
+            --gradient-2: linear-gradient(135deg, #6C3CE1 0%, #8B5CF6 50%, #00D4AA 100%);
+            --gradient-3: linear-gradient(180deg, #0A0A1A 0%, #12122A 100%);
+            --shadow-sm: 0 2px 10px rgba(108, 60, 225, 0.1);
+            --shadow-md: 0 8px 30px rgba(108, 60, 225, 0.15);
+            --shadow-lg: 0 20px 60px rgba(108, 60, 225, 0.2);
+            --shadow-glow: 0 0 40px rgba(108, 60, 225, 0.3);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--gray-300);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 26, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(108, 60, 225, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+            animation: logoShine 3s infinite;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .nav-logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo-text span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-400);
+            font-size: 14.5px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 11px 28px;
+            background: var(--gradient-1);
+            color: white !important;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(108, 60, 225, 0.35);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 60, 225, 0.5);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 26px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+
+        .hero-bg-orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: -10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .hero-bg-orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            bottom: -10%;
+            left: -5%;
+            animation-delay: -3s;
+        }
+
+        .hero-bg-orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-light);
+            top: 50%;
+            left: 40%;
+            opacity: 0.2;
+            animation-delay: -5s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .hero-grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(108, 60, 225, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 60, 225, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content { max-width: 600px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            background: rgba(108, 60, 225, 0.12);
+            border: 1px solid rgba(108, 60, 225, 0.25);
+            border-radius: 50px;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--primary-light);
+            margin-bottom: 28px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dotPulse 2s infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .hero-title {
+            font-size: clamp(38px, 5vw, 62px);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out 0.15s both;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--gray-400);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 480px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out 0.45s both;
+        }
+
+        .btn-primary {
+            padding: 16px 36px;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 56px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(108, 60, 225, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before { left: 100%; }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(108, 60, 225, 0.55);
+        }
+
+        .btn-outline {
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--gray-300);
+            border: 1.5px solid var(--dark-4);
+            border-radius: 56px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--white);
+            background: rgba(108, 60, 225, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-stat {
+            position: relative;
+        }
+
+        .hero-stat::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: var(--dark-4);
+        }
+
+        .hero-stat:last-child::after { display: none; }
+
+        .hero-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .hero-stat-number span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: var(--gray-500);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-mockup {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .mockup-browser {
+            background: var(--dark-2);
+            border-radius: 16px;
+            border: 1px solid rgba(108, 60, 225, 0.15);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg), 0 0 80px rgba(108, 60, 225, 0.1);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(3deg);
+            transition: transform 0.5s;
+        }
+
+        .mockup-browser:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-topbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 18px;
+            background: var(--dark-3);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .mockup-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot:nth-child(1) { background: #FF5F57; }
+        .mockup-dot:nth-child(2) { background: #FEBC2E; }
+        .mockup-dot:nth-child(3) { background: #28C840; }
+
+        .mockup-url {
+            flex: 1;
+            margin-left: 12px;
+            padding: 7px 16px;
+            background: var(--dark);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--gray-500);
+            font-family: 'Inter', monospace;
+        }
+
+        .mockup-body {
+            padding: 30px;
+            min-height: 300px;
+            background: linear-gradient(180deg, var(--dark-2) 0%, var(--dark-3) 100%);
+            position: relative;
+        }
+
+        .mockup-body-line {
+            height: 12px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            opacity: 0.6;
+        }
+
+        .mockup-body-line:nth-child(1) { width: 70%; background: var(--gradient-1); opacity: 0.8; height: 20px; border-radius: 10px; }
+        .mockup-body-line:nth-child(2) { width: 90%; background: var(--dark-4); }
+        .mockup-body-line:nth-child(3) { width: 75%; background: var(--dark-4); }
+        .mockup-body-line:nth-child(4) { width: 85%; background: var(--dark-4); margin-bottom: 24px; }
+        .mockup-body-line:nth-child(5) { width: 40%; background: var(--primary); height: 36px; border-radius: 20px; opacity: 0.7; }
+
+        .mockup-body-img {
+            width: 100%;
+            height: 100px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            margin-top: 24px;
+            opacity: 0.3;
+        }
+
+        .hero-float-card {
+            position: absolute;
+            background: var(--dark-2);
+            border: 1px solid rgba(108, 60, 225, 0.15);
+            border-radius: 14px;
+            padding: 16px 20px;
+            backdrop-filter: blur(10px);
+            animation: floatCard 4s ease-in-out infinite;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-float-card.card-1 {
+            top: -10px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .hero-float-card.card-2 {
+            bottom: 30px;
+            left: -40px;
+            animation-delay: -2s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .float-card-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .float-card-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .float-card-icon.green { background: rgba(0, 212, 170, 0.15); color: var(--accent); }
+        .float-card-icon.purple { background: rgba(108, 60, 225, 0.15); color: var(--primary-light); }
+
+        .float-card-text h4 { font-size: 13px; color: var(--white); font-weight: 600; }
+        .float-card-text p { font-size: 11px; color: var(--gray-500); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(108, 60, 225, 0.1);
+            border: 1px solid rgba(108, 60, 225, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 46px);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--gray-400);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-section {
+            background: var(--dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 40px 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(108, 60, 225, 0.2);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 24px;
+            background: rgba(108, 60, 225, 0.1);
+            color: var(--primary-light);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-1);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 14.5px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .service-link:hover { gap: 12px; color: var(--accent); }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio-section {
+            background: var(--dark-2);
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background: var(--dark-3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 50px;
+            color: var(--gray-400);
+            font-size: 13.5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(108, 60, 225, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .portfolio-card {
+            background: var(--dark);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(108, 60, 225, 0.25);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-card:nth-child(1) .portfolio-thumb { background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%); }
+        .portfolio-card:nth-child(2) .portfolio-thumb { background: linear-gradient(135deg, #3a1e5f 0%, #240f39 100%); }
+        .portfolio-card:nth-child(3) .portfolio-thumb { background: linear-gradient(135deg, #1e5f3a 0%, #0f3924 100%); }
+        .portfolio-card:nth-child(4) .portfolio-thumb { background: linear-gradient(135deg, #5f3a1e 0%, #39240f 100%); }
+        .portfolio-card:nth-child(5) .portfolio-thumb { background: linear-gradient(135deg, #5f1e3a 0%, #390f24 100%); }
+        .portfolio-card:nth-child(6) .portfolio-thumb { background: linear-gradient(135deg, #1e5f5f 0%, #0f3939 100%); }
+
+        .portfolio-thumb {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-thumb-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .portfolio-thumb-content i {
+            font-size: 40px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .portfolio-thumb-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(108, 60, 225, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s;
+        }
+
+        .portfolio-card:hover .portfolio-overlay { opacity: 1; }
+
+        .portfolio-overlay-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transform: scale(0.5);
+            transition: all 0.4s;
+        }
+
+        .portfolio-card:hover .portfolio-overlay-btn { transform: scale(1); }
+
+        .portfolio-info {
+            padding: 28px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tag {
+            padding: 4px 12px;
+            background: rgba(108, 60, 225, 0.1);
+            border-radius: 50px;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--primary-light);
+        }
+
+        .portfolio-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-info p {
+            font-size: 13.5px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        .portfolio-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .portfolio-client {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .portfolio-client-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .portfolio-client span {
+            font-size: 12.5px;
+            color: var(--gray-500);
+        }
+
+        .portfolio-year {
+            font-size: 12px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* ===== PROCESS ===== */
+        .process-section {
+            background: var(--dark);
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 12.5%;
+            width: 75%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0.2;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: var(--dark-2);
+            border: 2px solid rgba(108, 60, 225, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-light);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-step:hover .process-number {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .process-step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* ===== TECH STACK ===== */
+        .tech-section {
+            background: var(--dark-2);
+            padding: 80px 0;
+        }
+
+        .tech-scroll {
+            display: flex;
+            gap: 50px;
+            animation: techScroll 20s linear infinite;
+            width: max-content;
+        }
+
+        .tech-scroll:hover { animation-play-state: paused; }
+
+        @keyframes techScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: rgba(108, 60, 225, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .tech-item i {
+            font-size: 22px;
+            color: var(--primary-light);
+        }
+
+        .tech-item span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-300);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-section {
+            background: var(--dark);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.4s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(108, 60, 225, 0.2);
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-stars i {
+            color: #FBBF24;
+            font-size: 14px;
+        }
+
+        .testimonial-card blockquote {
+            font-size: 15px;
+            color: var(--gray-300);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .testimonial-author-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .testimonial-author-info p {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        /* ===== PRICING ===== */
+        .pricing-section {
+            background: var(--dark-2);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: center;
+        }
+
+        .pricing-card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 24px;
+            padding: 44px 36px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(108, 60, 225, 0.3);
+            transform: scale(1.04);
+            box-shadow: var(--shadow-lg), 0 0 60px rgba(108, 60, 225, 0.1);
+        }
+
+        .pricing-card.featured::before {
+            content: 'TERPOPULER';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 20px;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(108, 60, 225, 0.2);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.04) translateY(-8px);
+        }
+
+        .pricing-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price-desc {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price .currency {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-400);
+        }
+
+        .pricing-price .amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -2px;
+        }
+
+        .pricing-price .period {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .pricing-note {
+            font-size: 12.5px;
+            color: var(--gray-500);
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--gray-300);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .pricing-features li:last-child { border-bottom: none; }
+
+        .pricing-features li i {
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .pricing-btn.primary {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(108, 60, 225, 0.3);
+        }
+
+        .pricing-btn.primary:hover {
+            box-shadow: 0 8px 30px rgba(108, 60, 225, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .pricing-btn.outline {
+            background: transparent;
+            color: var(--gray-300);
+            border: 1.5px solid var(--dark-4);
+        }
+
+        .pricing-btn.outline:hover {
+            border-color: var(--primary);
+            color: white;
+            background: rgba(108, 60, 225, 0.05);
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: var(--dark);
+            padding: 100px 0;
+        }
+
+        .cta-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px 60px;
+            background: var(--dark-2);
+            border-radius: 32px;
+            border: 1px solid rgba(108, 60, 225, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+        }
+
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.1;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(28px, 3.5vw, 40px);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-box p {
+            font-size: 17px;
+            color: var(--gray-400);
+            margin-bottom: 36px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark-2);
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            font-size: 14.5px;
+            color: var(--gray-500);
+            margin-top: 16px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .footer-social {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--dark-3);
+            border: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .footer-social:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            font-size: 14px;
+            color: var(--gray-500);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer-bottom p {
+            font-size: 13.5px;
+            color: var(--gray-500);
+        }
+
+        .footer-bottom a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; gap: 50px; }
+            .hero-content { max-width: 100%; text-align: center; }
+            .hero-desc { margin: 0 auto 40px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-mockup { max-width: 420px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-timeline { grid-template-columns: repeat(2, 1fr); }
+            .process-timeline::before { display: none; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-8px); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 26, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 30px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(108, 60, 225, 0.15);
+            }
+            .mobile-toggle { display: flex; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .process-timeline { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .hero-float-card { display: none; }
+            .section { padding: 70px 0; }
+            .section-container { padding: 0 20px; }
+            .nav-container { padding: 0 20px; }
+            .hero { padding: 100px 0 60px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-outline { width: 100%; justify-content: center; max-width: 300px; }
+            .hero-stats { gap: 24px; }
+            .cta-box { padding: 50px 30px; }
+        }
+
+        /* ===== ANIMATIONS ON SCROLL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">DP</div>
+                <div class="nav-logo-text">DIGITAL <span>PRO</span></div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#portfolio">Portofolio</a></li>
+                <li><a href="#process">Proses</a></li>
+                <li><a href="#testimonials">Testimoni</a></li>
+                <li><a href="#pricing">Harga</a></li>
+                <li><a href="#contact" class="nav-cta">Hubungi Kami</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-bg-orb"></div>
+            <div class="hero-bg-orb"></div>
+            <div class="hero-bg-orb"></div>
+            <div class="hero-grid-overlay"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Menerima Project Baru 2026
+                </div>
+                <h1 class="hero-title">
+                    Kami Bangun<br>
+                    <span class="gradient-text">Website Impian</span><br>
+                    Bisnis Anda
+                </h1>
+                <p class="hero-desc">
+                    DIGITAL PRO menghadirkan solusi website profesional yang modern, cepat, dan SEO-friendly untuk mengembangkan bisnis Anda ke level selanjutnya.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn-primary">
+                        Lihat Portofolio
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn-outline">
+                        <i class="fab fa-whatsapp"></i>
+                        Konsultasi Gratis
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">150<span>+</span></div>
+                        <div class="hero-stat-label">Proyek Selesai</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">98<span>%</span></div>
+                        <div class="hero-stat-label">Klien Puas</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">5<span>+</span></div>
+                        <div class="hero-stat-label">Tahun Pengalaman</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-mockup">
+                    <div class="mockup-browser">
+                        <div class="mockup-topbar">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-url">🔒 digitalpro.id/project-client</div>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="mockup-body-line"></div>
+                            <div class="mockup-body-line"></div>
+                            <div class="mockup-body-line"></div>
+                            <div class="mockup-body-line"></div>
+                            <div class="mockup-body-line"></div>
+                            <div class="mockup-body-img"></div>
+                        </div>
+                    </div>
+                    <div class="hero-float-card card-1">
+                        <div class="float-card-row">
+                            <div class="float-card-icon green"><i class="fas fa-chart-line"></i></div>
+                            <div class="float-card-text">
+                                <h4>Performa 99/100</h4>
+                                <p>Google PageSpeed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-float-card card-2">
+                        <div class="float-card-row">
+                            <div class="float-card-icon purple"><i class="fas fa-shield-halved"></i></div>
+                            <div class="float-card-text">
+                                <h4>SSL Secured</h4>
+                                <p>100% Aman & Terpercaya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section services-section" id="services">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-rocket"></i> Layanan Kami</div>
+                <h2 class="section-title">Solusi Digital Lengkap<br>untuk Bisnis Anda</h2>
+                <p class="section-subtitle">Kami menawarkan berbagai layanan pembuatan website yang dirancang khusus untuk memenuhi kebutuhan bisnis modern.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-store"></i></div>
+                    <h3>Website Toko Online</h3>
+                    <p>E-commerce lengkap dengan payment gateway, manajemen produk, dan dashboard admin yang mudah digunakan.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Company Profile</h3>
+                    <p>Website perusahaan profesional yang menampilkan identitas brand, layanan, dan kredibilitas bisnis Anda.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Website Resto & Cafe</h3>
+                    <p>Website restoran dengan menu digital, reservasi online, integrasi GoFood/GrabFood, dan galeri foto menarik.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Website Edukasi</h3>
+                    <p>Platform pembelajaran online dengan fitur kursus, ujian, sertifikat digital, dan integrasi video conference.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h3>Website Booking</h3>
+                    <p>Sistem reservasi online untuk hotel, salon, klinik, dan jasa lainnya dengan kalender interaktif dan notifikasi.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Custom Web App</h3>
+                    <p>Aplikasi web custom sesuai kebutuhan bisnis Anda — dari sistem inventory, CRM, hingga dashboard analytics.</p>
+                    <a href="#" class="service-link">Pelajari Lebih <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="section portfolio-section" id="portfolio">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-briefcase"></i> Portofolio</div>
+                <h2 class="section-title">Karya Terbaik yang<br>Telah Kami Wujudkan</h2>
+                <p class="section-subtitle">Berikut adalah beberapa contoh website yang telah berhasil kami kerjakan untuk berbagai klien dari berbagai industri.</p>
+            </div>
+            <div class="portfolio-filters reveal">
+                <button class="filter-btn active">Semua</button>
+                <button class="filter-btn">E-Commerce</button>
+                <button class="filter-btn">Company Profile</button>
+                <button class="filter-btn">Resto & Cafe</button>
+                <button class="filter-btn">Edukasi</button>
+                <button class="filter-btn">Web App</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-tshirt"></i>
+                            <h4>FashionHub Store</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">E-Commerce</span>
+                            <span class="portfolio-tag">React</span>
+                            <span class="portfolio-tag">Node.js</span>
+                        </div>
+                        <h3>FashionHub Store</h3>
+                        <p>Toko fashion online dengan 5000+ produk, integrasi Midtrans, dan fitur AR try-on.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">FH</div>
+                            <span>FashionHub Indonesia</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-building"></i>
+                            <h4>Nusantara Corp</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Company Profile</span>
+                            <span class="portfolio-tag">Next.js</span>
+                        </div>
+                        <h3>Nusantara Corporation</h3>
+                        <p>Website korporat untuk grup perusahaan multi-industri dengan multi-bahasa (ID/EN/CN).</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">NC</div>
+                            <span>Nusantara Corp</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-mug-hot"></i>
+                            <h4>Kopi Nusantara</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Resto & Cafe</span>
+                            <span class="portfolio-tag">WordPress</span>
+                        </div>
+                        <h3>Kopi Nusantara Cafe</h3>
+                        <p>Website cafe dengan menu digital interaktif, sistem reservasi, dan loyalty program online.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">KN</div>
+                            <span>Kopi Nusantara</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-book-open"></i>
+                            <h4>EduMaster</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Edukasi</span>
+                            <span class="portfolio-tag">Laravel</span>
+                            <span class="portfolio-tag">Vue.js</span>
+                        </div>
+                        <h3>EduMaster Learning</h3>
+                        <p>Platform LMS dengan 200+ kursus, sistem ujian online, sertifikat otomatis, dan video streaming.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">EM</div>
+                            <span>EduMaster Indonesia</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>MediCare Clinic</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Web App</span>
+                            <span class="portfolio-tag">Booking</span>
+                        </div>
+                        <h3>MediCare Clinic</h3>
+                        <p>Sistem booking klinik online dengan rekam medis digital, telemedicine, dan payment gateway.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">MC</div>
+                            <span>MediCare Group</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-thumb">
+                        <div class="portfolio-thumb-content">
+                            <i class="fas fa-hotel"></i>
+                            <h4>Bali Paradise</h4>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Booking</span>
+                            <span class="portfolio-tag">Hotel</span>
+                        </div>
+                        <h3>Bali Paradise Resort</h3>
+                        <p>Website resort mewah dengan 3D virtual tour, booking engine, dan integrasi channel manager.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">BP</div>
+                            <span>Bali Paradise</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section process-section" id="process">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-diagram-project"></i> Proses Kerja</div>
+                <h2 class="section-title">4 Langkah Menuju<br>Website Impian Anda</h2>
+                <p class="section-subtitle">Proses kerja kami yang terstruktur memastikan proyek Anda selesai tepat waktu dengan hasil yang maksimal.</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step reveal">
+                    <div class="process-number">01</div>
+                    <h3>Konsultasi</h3>
+                    <p>Diskusi mendalam tentang kebutuhan, tujuan, dan target audience website Anda.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">02</div>
+                    <h3>Desain UI/UX</h3>
+                    <p>Pembuatan mockup dan prototype interaktif untuk approval sebelum development.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">03</div>
+                    <h3>Development</h3>
+                    <p>Coding dengan teknologi terkini, testing menyeluruh, dan optimasi performa.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">04</div>
+                    <h3>Launch & Support</h3>
+                    <p>Deploy website, training penggunaan, dan dukungan teknis berkelanjutan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECH STACK ===== -->
+    <section class="tech-section">
+        <div class="section-container">
+            <div class="section-header reveal" style="margin-bottom: 40px;">
+                <div class="section-tag"><i class="fas fa-layer-group"></i> Tech Stack</div>
+                <h2 class="section-title">Teknologi yang Kami Gunakan</h2>
+            </div>
+        </div>
+        <div style="overflow: hidden;">
+            <div class="tech-scroll">
+                <div class="tech-item"><i class="fab fa-react"></i><span>React.js</span></div>
+                <div class="tech-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
+                <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="tech-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+                <div class="tech-item"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
+                <div class="tech-item"><i class="fab fa-figma"></i><span>Figma</span></div>
+                <div class="tech-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+                <div class="tech-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                <div class="tech-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
+                <div class="tech-item"><i class="fab fa-shopify"></i><span>Shopify</span></div>
+                <!-- Duplicate for seamless scroll -->
+                <div class="tech-item"><i class="fab fa-react"></i><span>React.js</span></div>
+                <div class="tech-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
+                <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="tech-item"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+                <div class="tech-item"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
+                <div class="tech-item"><i class="fab fa-figma"></i><span>Figma</span></div>
+                <div class="tech-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+                <div class="tech-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                <div class="tech-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
+                <div class="tech-item"><i class="fab fa-shopify"></i><span>Shopify</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonial-section" id="testimonials">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-heart"></i> Testimoni</div>
+                <h2 class="section-title">Apa Kata Klien<br>Tentang Kami?</h2>
+                <p class="section-subtitle">Kepuasan klien adalah prioritas utama kami. Berikut adalah testimoni dari beberapa klien yang telah bekerja sama dengan kami.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Tim DIGITAL PRO sangat profesional! Website toko online kami jadi lebih modern dan penjualan naik 200% setelah redesign. Sangat recommended!"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AR</div>
+                        <div class="testimonial-author-info">
+                            <h4>Andi Rahmat</h4>
+                            <p>CEO, FashionHub Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Proses pengerjaan cepat, komunikatif, dan hasilnya melebihi ekspektasi. Website company profile kami sekarang terlihat sangat premium dan profesional."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SW</div>
+                        <div class="testimonial-author-info">
+                            <h4>Sari Wulandari</h4>
+                            <p>Marketing Director, Nusantara Corp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Sistem booking online yang dibuat sangat membantu operasional klinik kami. Pasien lebih mudah booking dan kami bisa fokus ke pelayanan. Terima kasih DIGITAL PRO!"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">DR</div>
+                        <div class="testimonial-author-info">
+                            <h4>Dr. Reza Firmansyah</h4>
+                            <p>Direktur, MediCare Clinic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="section pricing-section" id="pricing">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-tags"></i> Paket Harga</div>
+                <h2 class="section-title">Investasi Terbaik untuk<br>Website Bisnis Anda</h2>
+                <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan dan budget bisnis Anda. Semua paket termasuk support dan garansi.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Starter</h3>
+                    <p class="price-desc">Cocok untuk bisnis yang baru mulai online</p>
+                    <div class="pricing-price">
+                        <span class="currency">Rp</span>
+                        <span class="amount">2.5</span>
+                        <span class="period">jt</span>
+                    </div>
+                    <p class="pricing-note">Pembayaran sekali, tanpa biaya tersembunyi</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Desain Modern & Responsif</li>
+                        <li><i class="fas fa-check"></i> Hingga 5 Halaman</li>
+                        <li><i class="fas fa-check"></i> Domain + Hosting 1 Tahun</li>
+                        <li><i class="fas fa-check"></i> SSL Certificate</li>
+                        <li><i class="fas fa-check"></i> SEO On-Page Basic</li>
+                        <li><i class="fas fa-check"></i> Support 30 Hari</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn outline">Pilih Paket Starter</a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <h3>Professional</h3>
+                    <p class="price-desc">Untuk bisnis yang ingin tampil lebih serius</p>
+                    <div class="pricing-price">
+                        <span class="currency">Rp</span>
+                        <span class="amount">5.9</span>
+                        <span class="period">jt</span>
+                    </div>
+                    <p class="pricing-note">Pembayaran sekali, termasuk maintenance</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Semua Fitur Starter</li>
+                        <li><i class="fas fa-check"></i> Hingga 15 Halaman</li>
+                        <li><i class="fas fa-check"></i> CMS (Content Management)</li>
+                        <li><i class="fas fa-check"></i> Integrasi WhatsApp & Analytics</li>
+                        <li><i class="fas fa-check"></i> SEO Advanced + Blog</li>
+                        <li><i class="fas fa-check"></i> Speed Optimization</li>
+                        <li><i class="fas fa-check"></i> Support 90 Hari</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn primary">Pilih Paket Professional</a>
+                </div>
+                <div class="pricing-card reveal">
+                    <h3>Enterprise</h3>
+                    <p class="price-desc">Solusi lengkap untuk bisnis berskala besar</p>
+                    <div class="pricing-price">
+                        <span class="currency">Rp</span>
+                        <span class="amount">12</span>
+                        <span class="period">jt+</span>
+                    </div>
+                    <p class="pricing-note">Custom sesuai kebutuhan bisnis Anda</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Semua Fitur Professional</li>
+                        <li><i class="fas fa-check"></i> Halaman Unlimited</li>
+                        <li><i class="fas fa-check"></i> Custom Web Application</li>
+                        <li><i class="fas fa-check"></i> Payment Gateway Integration</li>
+                        <li><i class="fas fa-check"></i> API & Third-Party Integration</li>
+                        <li><i class="fas fa-check"></i> Dedicated Project Manager</li>
+                        <li><i class="fas fa-check"></i> Support 1 Tahun</li>
+                    </ul>
+                    <a href="#contact" class="pricing-btn outline">Hubungi Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section" id="contact">
+        <div class="section-container">
+            <div class="cta-box reveal">
+                <h2>Siap Membawa Bisnis Anda<br>ke Level Digital Selanjutnya?</h2>
+                <p>Konsultasikan kebutuhan website Anda secara gratis. Tim kami siap membantu mewujudkan website impian Anda.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/6281234567890" class="btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat WhatsApp Sekarang
+                    </a>
+                    <a href="mailto:hello@digitalpro.id" class="btn-outline">
+                        <i class="fas fa-envelope"></i>
+                        hello@digitalpro.id
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <div class="nav-logo-icon">DP</div>
+                        <div class="nav-logo-text">DIGITAL <span>PRO</span></div>
+                    </a>
+                    <p>Agensi pembuatan website profesional yang berkomitmen menghadirkan solusi digital terbaik untuk bisnis Indonesia.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-github"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#">Toko Online</a></li>
+                        <li><a href="#">Company Profile</a></li>
+                        <li><a href="#">Resto & Cafe</a></li>
+                        <li><a href="#">Website Edukasi</a></li>
+                        <li><a href="#">Custom Web App</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Portofolio</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="#">📍 Jakarta, Indonesia</a></li>
+                        <li><a href="tel:+6281234567890">📞 +62 812-3456-7890</a></li>
+                        <li><a href="mailto:hello@digitalpro.id">✉️ hello@digitalpro.id</a></li>
+                        <li><a href="#">🕐 Senin - Sabtu, 09:00 - 18:00</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="#">DIGITAL PRO</a>. All rights reserved.</p>
+                <p>Dibuat dengan ❤️ di Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Portfolio filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Counter animation for stats
+        function animateCounters() {
+            document.querySelectorAll('.hero-stat-number').forEach(counter => {
+                const text = counter.textContent;
+                const match = text.match(/(\d+)/);
+                if (match) {
+                    const target = parseInt(match[1]);
+                    const suffix = text.replace(match[1], '');
+                    let current = 0;
+                    const increment = target / 60;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.innerHTML = Math.floor(current) + '<span>' + suffix.replace(/\d/g, '') + '</span>';
+                    }, 25);
+                }
+            });
+        }
+
+        // Trigger counter animation when hero is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) heroObserver.observe(heroStats);
+    </script>
+</body>
+</html>
