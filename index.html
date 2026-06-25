@@ -823,6 +823,13 @@
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        .portfolio-thumb a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
         .portfolio-card:hover .portfolio-thumb img {
             transform: scale(1.08);
         }
@@ -1690,159 +1697,171 @@
             </div>
             <div class="portfolio-grid">
 
-                <!-- ✅ Kartu 1: FashionHub Store -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-1.jpg" alt="FashionHub Store">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">E-Commerce</span>
-                            <span class="portfolio-tag">React</span>
-                            <span class="portfolio-tag">Node.js</span>
-                        </div>
-                        <h3>FashionHub Store</h3>
-                        <p>Toko fashion online dengan 5000+ produk, integrasi Midtrans, dan fitur AR try-on.</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">FH</div>
-                            <span>FashionHub Indonesia</span>
-                        </div>
-                        <span class="portfolio-year">2025</span>
-                    </div>
-                </div>
-
-                <!-- ✅ Kartu 2: Nusantara Corporation -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-2.jpg" alt="Nusantara Corporation">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Company Profile</span>
-                            <span class="portfolio-tag">Next.js</span>
-                        </div>
-                        <h3>Nusantara Corporation</h3>
-                        <p>Website korporat untuk grup perusahaan multi-industri dengan multi-bahasa (ID/EN/CN).</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">NC</div>
-                            <span>Nusantara Corp</span>
-                        </div>
-                        <span class="portfolio-year">2025</span>
-                    </div>
-                </div>
-
-                <!-- ✅ Kartu 3: Kopi Nusantara Cafe -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-3.jpg" alt="Kopi Nusantara Cafe">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Resto & Cafe</span>
-                            <span class="portfolio-tag">WordPress</span>
-                        </div>
-                        <h3>Kopi Nusantara Cafe</h3>
-                        <p>Website cafe dengan menu digital interaktif, sistem reservasi, dan loyalty program online.</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">KN</div>
-                            <span>Kopi Nusantara</span>
-                        </div>
-                        <span class="portfolio-year">2026</span>
-                    </div>
-                </div>
-
-                <!-- ✅ Kartu 4: EduMaster Learning -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-4.jpg" alt="EduMaster Learning">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Edukasi</span>
-                            <span class="portfolio-tag">Laravel</span>
-                            <span class="portfolio-tag">Vue.js</span>
-                        </div>
-                        <h3>EduMaster Learning</h3>
-                        <p>Platform LMS dengan 200+ kursus, sistem ujian online, sertifikat otomatis, dan video streaming.</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">EM</div>
-                            <span>EduMaster Indonesia</span>
-                        </div>
-                        <span class="portfolio-year">2025</span>
-                    </div>
-                </div>
-
-                <!-- ✅ Kartu 5: MediCare Clinic -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-5.jpg" alt="MediCare Clinic">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Web App</span>
-                            <span class="portfolio-tag">Booking</span>
-                        </div>
-                        <h3>MediCare Clinic</h3>
-                        <p>Sistem booking klinik online dengan rekam medis digital, telemedicine, dan payment gateway.</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">MC</div>
-                            <span>MediCare Group</span>
-                        </div>
-                        <span class="portfolio-year">2026</span>
-                    </div>
-                </div>
-
-                <!-- ✅ Kartu 6: Bali Paradise Resort -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-thumb">
-                        <img src="portfolio-6.jpg" alt="Bali Paradise Resort">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Booking</span>
-                            <span class="portfolio-tag">Hotel</span>
-                        </div>
-                        <h3>Bali Paradise Resort</h3>
-                        <p>Website resort mewah dengan 3D virtual tour, booking engine, dan integrasi channel manager.</p>
-                    </div>
-                    <div class="portfolio-footer">
-                        <div class="portfolio-client">
-                            <div class="portfolio-client-avatar">BP</div>
-                            <span>Bali Paradise</span>
-                        </div>
-                        <span class="portfolio-year">2026</span>
-                    </div>
-                </div>
-
+    <!-- Kartu 1: FashionHub Store -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://fashionhub.co.id" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-1.jpg" alt="FashionHub Store">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
             </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">E-Commerce</span>
+                <span class="portfolio-tag">React</span>
+                <span class="portfolio-tag">Node.js</span>
+            </div>
+            <h3>FashionHub Store</h3>
+            <p>Toko fashion online dengan 5000+ produk, integrasi Midtrans, dan fitur AR try-on.</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">FH</div>
+                <span>FashionHub Indonesia</span>
+            </div>
+            <span class="portfolio-year">2025</span>
+        </div>
+    </div>
+
+    <!-- Kartu 2: Nusantara Corporation -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://nusantaracorp.com" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-2.jpg" alt="Nusantara Corporation">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">Company Profile</span>
+                <span class="portfolio-tag">Next.js</span>
+            </div>
+            <h3>Nusantara Corporation</h3>
+            <p>Website korporat untuk grup perusahaan multi-industri dengan multi-bahasa (ID/EN/CN).</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">NC</div>
+                <span>Nusantara Corp</span>
+            </div>
+            <span class="portfolio-year">2025</span>
+        </div>
+    </div>
+
+    <!-- Kartu 3: Kopi Nusantara Cafe -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://kopinusantara.id" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-3.jpg" alt="Kopi Nusantara Cafe">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">Resto & Cafe</span>
+                <span class="portfolio-tag">WordPress</span>
+            </div>
+            <h3>Kopi Nusantara Cafe</h3>
+            <p>Website cafe dengan menu digital interaktif, sistem reservasi, dan loyalty program online.</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">KN</div>
+                <span>Kopi Nusantara</span>
+            </div>
+            <span class="portfolio-year">2026</span>
+        </div>
+    </div>
+
+    <!-- Kartu 4: EduMaster Learning -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://edumaster.id" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-4.jpg" alt="EduMaster Learning">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">Edukasi</span>
+                <span class="portfolio-tag">Laravel</span>
+                <span class="portfolio-tag">Vue.js</span>
+            </div>
+            <h3>EduMaster Learning</h3>
+            <p>Platform LMS dengan 200+ kursus, sistem ujian online, sertifikat otomatis, dan video streaming.</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">EM</div>
+                <span>EduMaster Indonesia</span>
+            </div>
+            <span class="portfolio-year">2025</span>
+        </div>
+    </div>
+
+    <!-- Kartu 5: MediCare Clinic -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://medicareclinic.id" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-5.jpg" alt="MediCare Clinic">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">Web App</span>
+                <span class="portfolio-tag">Booking</span>
+            </div>
+            <h3>MediCare Clinic</h3>
+            <p>Sistem booking klinik online dengan rekam medis digital, telemedicine, dan payment gateway.</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">MC</div>
+                <span>MediCare Group</span>
+            </div>
+            <span class="portfolio-year">2026</span>
+        </div>
+    </div>
+
+    <!-- Kartu 6: Bali Paradise Resort -->
+    <div class="portfolio-card reveal">
+        <div class="portfolio-thumb">
+            <a href="https://baliparadise.com" target="_blank" rel="noopener noreferrer">
+                <img src="portfolio-6.jpg" alt="Bali Paradise Resort">
+            </a>
+            <div class="portfolio-overlay">
+                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+            </div>
+        </div>
+        <div class="portfolio-info">
+            <div class="portfolio-tags">
+                <span class="portfolio-tag">Booking</span>
+                <span class="portfolio-tag">Hotel</span>
+            </div>
+            <h3>Bali Paradise Resort</h3>
+            <p>Website resort mewah dengan 3D virtual tour, booking engine, dan integrasi channel manager.</p>
+        </div>
+        <div class="portfolio-footer">
+            <div class="portfolio-client">
+                <div class="portfolio-client-avatar">BP</div>
+                <span>Bali Paradise</span>
+            </div>
+            <span class="portfolio-year">2026</span>
+        </div>
+    </div>
+
+</div>
         </div>
     </section>
 
