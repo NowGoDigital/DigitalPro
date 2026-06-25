@@ -808,38 +808,23 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .portfolio-card:nth-child(1) .portfolio-thumb { background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%); }
-        .portfolio-card:nth-child(2) .portfolio-thumb { background: linear-gradient(135deg, #3a1e5f 0%, #240f39 100%); }
-        .portfolio-card:nth-child(3) .portfolio-thumb { background: linear-gradient(135deg, #1e5f3a 0%, #0f3924 100%); }
-        .portfolio-card:nth-child(4) .portfolio-thumb { background: linear-gradient(135deg, #5f3a1e 0%, #39240f 100%); }
-        .portfolio-card:nth-child(5) .portfolio-thumb { background: linear-gradient(135deg, #5f1e3a 0%, #390f24 100%); }
-        .portfolio-card:nth-child(6) .portfolio-thumb { background: linear-gradient(135deg, #1e5f5f 0%, #0f3939 100%); }
-
+        /* ✅ PERUBAHAN CSS: Styling untuk foto di portfolio thumb */
         .portfolio-thumb {
             height: 220px;
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .portfolio-thumb-content {
-            text-align: center;
-            color: white;
-            z-index: 2;
+        .portfolio-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .portfolio-thumb-content i {
-            font-size: 40px;
-            margin-bottom: 12px;
-            opacity: 0.8;
-        }
-
-        .portfolio-thumb-content h4 {
-            font-size: 16px;
-            font-weight: 600;
-            opacity: 0.9;
+        .portfolio-card:hover .portfolio-thumb img {
+            transform: scale(1.08);
         }
 
         .portfolio-overlay {
@@ -1704,12 +1689,11 @@
                 <button class="filter-btn">Web App</button>
             </div>
             <div class="portfolio-grid">
+
+                <!-- ✅ Kartu 1: FashionHub Store -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-tshirt"></i>
-                            <h4>FashionHub Store</h4>
-                        </div>
+                        <img src="portfolio-1.jpg" alt="FashionHub Store">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1731,12 +1715,11 @@
                         <span class="portfolio-year">2025</span>
                     </div>
                 </div>
+
+                <!-- ✅ Kartu 2: Nusantara Corporation -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-building"></i>
-                            <h4>Nusantara Corp</h4>
-                        </div>
+                        <img src="portfolio-2.jpg" alt="Nusantara Corporation">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1757,12 +1740,11 @@
                         <span class="portfolio-year">2025</span>
                     </div>
                 </div>
+
+                <!-- ✅ Kartu 3: Kopi Nusantara Cafe -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-mug-hot"></i>
-                            <h4>Kopi Nusantara</h4>
-                        </div>
+                        <img src="portfolio-3.jpg" alt="Kopi Nusantara Cafe">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1783,12 +1765,11 @@
                         <span class="portfolio-year">2026</span>
                     </div>
                 </div>
+
+                <!-- ✅ Kartu 4: EduMaster Learning -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-book-open"></i>
-                            <h4>EduMaster</h4>
-                        </div>
+                        <img src="portfolio-4.jpg" alt="EduMaster Learning">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1810,12 +1791,11 @@
                         <span class="portfolio-year">2025</span>
                     </div>
                 </div>
+
+                <!-- ✅ Kartu 5: MediCare Clinic -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-heartbeat"></i>
-                            <h4>MediCare Clinic</h4>
-                        </div>
+                        <img src="portfolio-5.jpg" alt="MediCare Clinic">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1836,12 +1816,11 @@
                         <span class="portfolio-year">2026</span>
                     </div>
                 </div>
+
+                <!-- ✅ Kartu 6: Bali Paradise Resort -->
                 <div class="portfolio-card reveal">
                     <div class="portfolio-thumb">
-                        <div class="portfolio-thumb-content">
-                            <i class="fas fa-hotel"></i>
-                            <h4>Bali Paradise</h4>
-                        </div>
+                        <img src="portfolio-6.jpg" alt="Bali Paradise Resort">
                         <div class="portfolio-overlay">
                             <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
                         </div>
@@ -1862,6 +1841,7 @@
                         <span class="portfolio-year">2026</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
