@@ -791,6 +791,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 28px;
+            transition: all 0.4s;
         }
 
         .portfolio-card {
@@ -808,11 +809,18 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* ✅ PERUBAHAN CSS: Styling untuk foto di portfolio thumb */
+        /* Portfolio Thumb dengan Foto & Link */
         .portfolio-thumb {
             height: 220px;
             position: relative;
             overflow: hidden;
+        }
+
+        .portfolio-thumb a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
         }
 
         .portfolio-thumb img {
@@ -821,13 +829,6 @@
             object-fit: cover;
             display: block;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .portfolio-thumb a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
         }
 
         .portfolio-card:hover .portfolio-thumb img {
@@ -846,6 +847,7 @@
             justify-content: center;
             opacity: 0;
             transition: all 0.4s;
+            pointer-events: none;
         }
 
         .portfolio-card:hover .portfolio-overlay { opacity: 1; }
@@ -865,6 +867,26 @@
         }
 
         .portfolio-card:hover .portfolio-overlay-btn { transform: scale(1); }
+
+        /* Animasi Filter Show/Hide */
+        .portfolio-card.filter-hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+
+        .portfolio-card.filter-visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
 
         .portfolio-info {
             padding: 28px;
@@ -1687,181 +1709,184 @@
                 <h2 class="section-title">Karya Terbaik yang<br>Telah Kami Wujudkan</h2>
                 <p class="section-subtitle">Berikut adalah beberapa contoh website yang telah berhasil kami kerjakan untuk berbagai klien dari berbagai industri.</p>
             </div>
+
+            <!-- Filter Buttons dengan data-filter -->
             <div class="portfolio-filters reveal">
-                <button class="filter-btn active">Semua</button>
-                <button class="filter-btn">E-Commerce</button>
-                <button class="filter-btn">Company Profile</button>
-                <button class="filter-btn">Resto & Cafe</button>
-                <button class="filter-btn">Edukasi</button>
-                <button class="filter-btn">Web App</button>
+                <button class="filter-btn active" data-filter="semua">Semua</button>
+                <button class="filter-btn" data-filter="e-commerce">E-Commerce</button>
+                <button class="filter-btn" data-filter="company-profile">Company Profile</button>
+                <button class="filter-btn" data-filter="resto">Resto & Cafe</button>
+                <button class="filter-btn" data-filter="edukasi">Edukasi</button>
+                <button class="filter-btn" data-filter="web-app">Web App</button>
             </div>
-            <div class="portfolio-grid">
 
-    <!-- Kartu 1: FashionHub Store -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://nowgodigital.github.io/template1/" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-1.jpg" alt="FashionHub Store">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">E-Commerce</span>
-                <span class="portfolio-tag">React</span>
-                <span class="portfolio-tag">Node.js</span>
-            </div>
-            <h3>FashionHub Store</h3>
-            <p>Toko fashion online dengan 5000+ produk, integrasi Midtrans, dan fitur AR try-on.</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">FH</div>
-                <span>FashionHub Indonesia</span>
-            </div>
-            <span class="portfolio-year">2025</span>
-        </div>
-    </div>
+            <div class="portfolio-grid" id="portfolioGrid">
 
-    <!-- Kartu 2: Nusantara Corporation -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://nusantaracorp.com" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-2.jpg" alt="Nusantara Corporation">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">Company Profile</span>
-                <span class="portfolio-tag">Next.js</span>
-            </div>
-            <h3>Nusantara Corporation</h3>
-            <p>Website korporat untuk grup perusahaan multi-industri dengan multi-bahasa (ID/EN/CN).</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">NC</div>
-                <span>Nusantara Corp</span>
-            </div>
-            <span class="portfolio-year">2025</span>
-        </div>
-    </div>
+                <!-- Kartu 1: FashionHub Store -->
+                <div class="portfolio-card reveal filter-visible" data-category="e-commerce">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template1/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-1.jpg" alt="FashionHub Store">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">E-Commerce</span>
+                            <span class="portfolio-tag">React</span>
+                            <span class="portfolio-tag">Node.js</span>
+                        </div>
+                        <h3>FashionHub Store</h3>
+                        <p>Toko fashion online dengan 5000+ produk, integrasi Midtrans, dan fitur AR try-on.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">FH</div>
+                            <span>FashionHub Indonesia</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
 
-    <!-- Kartu 3: Kopi Nusantara Cafe -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://kopinusantara.id" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-3.jpg" alt="Kopi Nusantara Cafe">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">Resto & Cafe</span>
-                <span class="portfolio-tag">WordPress</span>
-            </div>
-            <h3>Kopi Nusantara Cafe</h3>
-            <p>Website cafe dengan menu digital interaktif, sistem reservasi, dan loyalty program online.</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">KN</div>
-                <span>Kopi Nusantara</span>
-            </div>
-            <span class="portfolio-year">2026</span>
-        </div>
-    </div>
+                <!-- Kartu 2: Nusantara Corporation -->
+                <div class="portfolio-card reveal filter-visible" data-category="company-profile">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template2/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-2.jpg" alt="Nusantara Corporation">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Company Profile</span>
+                            <span class="portfolio-tag">Next.js</span>
+                        </div>
+                        <h3>Nusantara Corporation</h3>
+                        <p>Website korporat untuk grup perusahaan multi-industri dengan multi-bahasa (ID/EN/CN).</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">NC</div>
+                            <span>Nusantara Corp</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
 
-    <!-- Kartu 4: EduMaster Learning -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://edumaster.id" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-4.jpg" alt="EduMaster Learning">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">Edukasi</span>
-                <span class="portfolio-tag">Laravel</span>
-                <span class="portfolio-tag">Vue.js</span>
-            </div>
-            <h3>EduMaster Learning</h3>
-            <p>Platform LMS dengan 200+ kursus, sistem ujian online, sertifikat otomatis, dan video streaming.</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">EM</div>
-                <span>EduMaster Indonesia</span>
-            </div>
-            <span class="portfolio-year">2025</span>
-        </div>
-    </div>
+                <!-- Kartu 3: Kopi Nusantara Cafe -->
+                <div class="portfolio-card reveal filter-visible" data-category="resto">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template3/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-3.jpg" alt="Kopi Nusantara Cafe">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Resto & Cafe</span>
+                            <span class="portfolio-tag">WordPress</span>
+                        </div>
+                        <h3>Kopi Nusantara Cafe</h3>
+                        <p>Website cafe dengan menu digital interaktif, sistem reservasi, dan loyalty program online.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">KN</div>
+                            <span>Kopi Nusantara</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
 
-    <!-- Kartu 5: MediCare Clinic -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://medicareclinic.id" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-5.jpg" alt="MediCare Clinic">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">Web App</span>
-                <span class="portfolio-tag">Booking</span>
-            </div>
-            <h3>MediCare Clinic</h3>
-            <p>Sistem booking klinik online dengan rekam medis digital, telemedicine, dan payment gateway.</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">MC</div>
-                <span>MediCare Group</span>
-            </div>
-            <span class="portfolio-year">2026</span>
-        </div>
-    </div>
+                <!-- Kartu 4: EduMaster Learning -->
+                <div class="portfolio-card reveal filter-visible" data-category="edukasi">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template4/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-4.jpg" alt="EduMaster Learning">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Edukasi</span>
+                            <span class="portfolio-tag">Laravel</span>
+                            <span class="portfolio-tag">Vue.js</span>
+                        </div>
+                        <h3>EduMaster Learning</h3>
+                        <p>Platform LMS dengan 200+ kursus, sistem ujian online, sertifikat otomatis, dan video streaming.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">EM</div>
+                            <span>EduMaster Indonesia</span>
+                        </div>
+                        <span class="portfolio-year">2025</span>
+                    </div>
+                </div>
 
-    <!-- Kartu 6: Bali Paradise Resort -->
-    <div class="portfolio-card reveal">
-        <div class="portfolio-thumb">
-            <a href="https://baliparadise.com" target="_blank" rel="noopener noreferrer">
-                <img src="portfolio-6.jpg" alt="Bali Paradise Resort">
-            </a>
-            <div class="portfolio-overlay">
-                <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
-            </div>
-        </div>
-        <div class="portfolio-info">
-            <div class="portfolio-tags">
-                <span class="portfolio-tag">Booking</span>
-                <span class="portfolio-tag">Hotel</span>
-            </div>
-            <h3>Bali Paradise Resort</h3>
-            <p>Website resort mewah dengan 3D virtual tour, booking engine, dan integrasi channel manager.</p>
-        </div>
-        <div class="portfolio-footer">
-            <div class="portfolio-client">
-                <div class="portfolio-client-avatar">BP</div>
-                <span>Bali Paradise</span>
-            </div>
-            <span class="portfolio-year">2026</span>
-        </div>
-    </div>
+                <!-- Kartu 5: MediCare Clinic -->
+                <div class="portfolio-card reveal filter-visible" data-category="web-app">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template5/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-5.jpg" alt="MediCare Clinic">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Web App</span>
+                            <span class="portfolio-tag">Booking</span>
+                        </div>
+                        <h3>MediCare Clinic</h3>
+                        <p>Sistem booking klinik online dengan rekam medis digital, telemedicine, dan payment gateway.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">MC</div>
+                            <span>MediCare Group</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
 
-</div>
+                <!-- Kartu 6: Bali Paradise Resort -->
+                <div class="portfolio-card reveal filter-visible" data-category="web-app">
+                    <div class="portfolio-thumb">
+                        <a href="https://nowgodigital.github.io/template6/" target="_blank" rel="noopener noreferrer">
+                            <img src="portfolio-6.jpg" alt="Bali Paradise Resort">
+                        </a>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Booking</span>
+                            <span class="portfolio-tag">Hotel</span>
+                        </div>
+                        <h3>Bali Paradise Resort</h3>
+                        <p>Website resort mewah dengan 3D virtual tour, booking engine, dan integrasi channel manager.</p>
+                    </div>
+                    <div class="portfolio-footer">
+                        <div class="portfolio-client">
+                            <div class="portfolio-client-avatar">BP</div>
+                            <span>Bali Paradise</span>
+                        </div>
+                        <span class="portfolio-year">2026</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -1918,7 +1943,6 @@
                 <div class="tech-item"><i class="fab fa-docker"></i><span>Docker</span></div>
                 <div class="tech-item"><i class="fas fa-database"></i><span>MongoDB</span></div>
                 <div class="tech-item"><i class="fab fa-shopify"></i><span>Shopify</span></div>
-                <!-- Duplicate for seamless scroll -->
                 <div class="tech-item"><i class="fab fa-react"></i><span>React.js</span></div>
                 <div class="tech-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
                 <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
@@ -1944,11 +1968,7 @@
             <div class="testimonial-grid">
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                     <blockquote>"Tim DIGITAL PRO sangat profesional! Website toko online kami jadi lebih modern dan penjualan naik 200% setelah redesign. Sangat recommended!"</blockquote>
                     <div class="testimonial-author">
@@ -1961,11 +1981,7 @@
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                     <blockquote>"Proses pengerjaan cepat, komunikatif, dan hasilnya melebihi ekspektasi. Website company profile kami sekarang terlihat sangat premium dan profesional."</blockquote>
                     <div class="testimonial-author">
@@ -1978,11 +1994,7 @@
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                     <blockquote>"Sistem booking online yang dibuat sangat membantu operasional klinik kami. Pasien lebih mudah booking dan kami bisa fokus ke pelayanan. Terima kasih DIGITAL PRO!"</blockquote>
                     <div class="testimonial-author">
@@ -2147,11 +2159,7 @@
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Mobile menu toggle
@@ -2170,11 +2178,41 @@
             });
         });
 
-        // Portfolio filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // ✅ DIPERBAIKI: Portfolio filter — sekarang benar-benar memfilter kartu
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Update active button
+                filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+
+                    if (filter === 'semua' || category === filter) {
+                        // Tampilkan kartu
+                        card.classList.remove('filter-hidden');
+                        card.classList.add('filter-visible');
+                        card.style.display = '';
+                        // Trigger animasi masuk
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        // Sembunyikan kartu dengan animasi
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            card.classList.add('filter-hidden');
+                            card.classList.remove('filter-visible');
+                        }, 400);
+                    }
+                });
             });
         });
 
@@ -2190,11 +2228,13 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Smooth scroll for anchor links
+        // ✅ DIPERBAIKI: Smooth scroll — hanya untuk anchor internal, tidak memblokir link portofolio
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            const href = anchor.getAttribute('href');
+            if (href === '#') return; // Skip href="#" kosong
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
@@ -2223,7 +2263,6 @@
             });
         }
 
-        // Trigger counter animation when hero is visible
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
