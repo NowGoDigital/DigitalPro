@@ -1,1 +1,1479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung Makan Bu Siti - Masakan Khas Rumahan Sasak Lombok</title>
+    <meta name="description" content="Warung Makan Bu Siti menyajikan masakan khas rumahan Sasak Lombok. Ayam Taliwang, Plecing Kangkung, Bebalung, dan lainnya. Pesan sekarang!">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --merah: #C0392B;
+            --merah-tua: #96281B;
+            --oranye: #E67E22;
+            --oranye-muda: #F39C12;
+            --kuning: #F9E79F;
+            --hijau: #27AE60;
+            --hijau-tua: #1E8449;
+            --krem: #FFF9F0;
+            --krem-2: #FEF5E7;
+            --cokelat: #5D4037;
+            --cokelat-tua: #3E2723;
+            --putih: #FFFFFF;
+            --abu: #7F8C8D;
+            --abu-muda: #F8F9FA;
+            --shadow: 0 10px 40px rgba(93, 64, 55, 0.12);
+            --shadow-lg: 0 20px 60px rgba(93, 64, 55, 0.18);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--krem);
+            color: var(--cokelat);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 249, 240, 0.96);
+            backdrop-filter: blur(20px);
+            padding: 10px 0;
+            box-shadow: 0 2px 30px rgba(93, 64, 55, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 30px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 48px; height: 48px;
+            background: var(--merah);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: white;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+        }
+
+        .nav-logo-text h1 {
+            font-size: 20px; font-weight: 800;
+            color: var(--cokelat-tua);
+            line-height: 1.1;
+        }
+
+        .nav-logo-text span {
+            font-size: 11px; color: var(--oranye);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex; align-items: center; gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none; color: var(--cokelat);
+            font-size: 14px; font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--merah);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--merah); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--merah);
+            color: white !important;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+            transition: all 0.3s;
+        }
+
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4); }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 24px; height: 2.5px;
+            background: var(--cokelat-tua);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cokelat-tua) 0%, var(--merah-tua) 100%);
+        }
+
+        .hero-pattern {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-container {
+            max-width: 1200px; margin: 0 auto; padding: 120px 30px 80px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+            position: relative; z-index: 2;
+        }
+
+        .hero-content { color: white; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 13px; font-weight: 600;
+            color: var(--kuning);
+            margin-bottom: 24px;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 5vw, 58px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-title .highlight {
+            color: var(--oranye-muda);
+            position: relative;
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 36px;
+            max-width: 460px;
+            line-height: 1.8;
+            animation: fadeUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex; gap: 16px; flex-wrap: wrap;
+            animation: fadeUp 0.8s ease-out 0.3s both;
+        }
+
+        .btn-wa {
+            padding: 16px 32px;
+            background: #25D366;
+            color: white;
+            border: none; border-radius: 56px;
+            font-size: 15px; font-weight: 700;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4); }
+
+        .btn-menu {
+            padding: 16px 32px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 56px;
+            font-size: 15px; font-weight: 700;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all 0.3s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-menu:hover {
+            border-color: var(--oranye-muda);
+            color: var(--oranye-muda);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-stats {
+            display: flex; gap: 40px;
+            margin-top: 50px;
+            animation: fadeUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-stat h3 {
+            font-size: 30px; font-weight: 800;
+            color: var(--oranye-muda);
+        }
+
+        .hero-stat p { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        .hero-plate {
+            width: 380px; height: 380px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--oranye) 0%, var(--merah) 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 160px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: floatPlate 4s ease-in-out infinite;
+        }
+
+        @keyframes floatPlate {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .hero-float-tag {
+            position: absolute;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            font-size: 13px; font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+            animation: floatTag 3s ease-in-out infinite;
+        }
+
+        .hero-float-tag.tag-1 { top: 20px; right: -20px; animation-delay: 0s; }
+        .hero-float-tag.tag-2 { bottom: 40px; left: -30px; animation-delay: -1.5s; }
+
+        @keyframes floatTag {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section { padding: 90px 0; }
+        .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 18px;
+            background: rgba(192, 57, 43, 0.08);
+            border: 1px solid rgba(192, 57, 43, 0.15);
+            border-radius: 50px;
+            font-size: 12px; font-weight: 700;
+            color: var(--merah);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            color: var(--cokelat-tua);
+            margin-bottom: 14px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--abu);
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* ===== TENTANG ===== */
+        .about-section { background: var(--putih); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+        }
+
+        .about-img-main {
+            width: 100%; height: 420px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--oranye) 0%, var(--merah) 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 120px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-img-badge {
+            position: absolute; bottom: -20px; right: -10px;
+            background: var(--merah);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-img-badge h4 { font-size: 28px; font-weight: 800; }
+        .about-img-badge p { font-size: 12px; opacity: 0.8; }
+
+        .about-content h2 {
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 800;
+            color: var(--cokelat-tua);
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 span { color: var(--merah); }
+
+        .about-content p {
+            font-size: 15px;
+            color: var(--abu);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 16px; margin-top: 28px;
+        }
+
+        .about-feature {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px;
+            background: var(--krem);
+            border-radius: 14px;
+            font-size: 14px; font-weight: 600;
+        }
+
+        .about-feature i {
+            color: var(--hijau);
+            font-size: 16px;
+        }
+
+        /* ===== MENU ANDALAN ===== */
+        .menu-section { background: var(--krem); }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .menu-card-badge {
+            position: absolute; top: 16px; left: 16px;
+            z-index: 3;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px; font-weight: 700;
+            color: white;
+        }
+
+        .badge-favorit { background: var(--merah); }
+        .badge-pedas { background: var(--oranye); }
+        .badge-baru { background: var(--hijau); }
+
+        .menu-card-img {
+            height: 200px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card-img.bg-1 { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
+        .menu-card-img.bg-2 { background: linear-gradient(135deg, #a8e063, #56ab2f); }
+        .menu-card-img.bg-3 { background: linear-gradient(135deg, #FFC3A0, #FF6B6B); }
+        .menu-card-img.bg-4 { background: linear-gradient(135deg, #f5af19, #f12711); }
+        .menu-card-img.bg-5 { background: linear-gradient(135deg, #c2e59c, #64b3f4); }
+        .menu-card-img.bg-6 { background: linear-gradient(135deg, #ee9ca7, #ffdde1); }
+
+        .menu-card-body { padding: 24px; }
+
+        .menu-card-body h3 {
+            font-size: 20px; font-weight: 700;
+            color: var(--cokelat-tua);
+            margin-bottom: 8px;
+        }
+
+        .menu-card-body p {
+            font-size: 13.5px;
+            color: var(--abu);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .menu-card-footer {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .menu-price {
+            font-size: 22px; font-weight: 800;
+            color: var(--merah);
+        }
+
+        .menu-price span { font-size: 13px; font-weight: 500; color: var(--abu); }
+
+        .menu-order-btn {
+            padding: 10px 20px;
+            background: var(--krem);
+            color: var(--merah);
+            border: 2px solid var(--merah);
+            border-radius: 50px;
+            font-size: 13px; font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .menu-order-btn:hover {
+            background: var(--merah);
+            color: white;
+        }
+
+        /* ===== MENU LENGKAP ===== */
+        .menu-list-section { background: var(--putih); }
+
+        .menu-list-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-list-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 24px;
+            background: var(--krem);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .menu-list-item:hover {
+            background: var(--krem-2);
+            transform: translateX(5px);
+        }
+
+        .menu-list-left {
+            display: flex; align-items: center; gap: 14px;
+        }
+
+        .menu-list-emoji { font-size: 32px; }
+
+        .menu-list-info h4 {
+            font-size: 16px; font-weight: 700;
+            color: var(--cokelat-tua);
+        }
+
+        .menu-list-info p { font-size: 12px; color: var(--abu); }
+
+        .menu-list-price {
+            font-size: 18px; font-weight: 800;
+            color: var(--merah);
+            white-space: nowrap;
+        }
+
+        .menu-category-title {
+            grid-column: 1 / -1;
+            font-size: 20px; font-weight: 800;
+            color: var(--merah);
+            padding: 10px 0 0;
+            border-bottom: 2px solid var(--krem);
+            margin-bottom: 5px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        /* ===== GALERI ===== */
+        .gallery-section { background: var(--krem); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            height: 220px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 60px;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item:nth-child(1) { grid-column: span 2; background: linear-gradient(135deg, #FFECD2, #FCB69F); }
+        .gallery-item:nth-child(2) { background: linear-gradient(135deg, #a8e063, #56ab2f); }
+        .gallery-item:nth-child(3) { background: linear-gradient(135deg, #FFC3A0, #FF6B6B); }
+        .gallery-item:nth-child(4) { background: linear-gradient(135deg, #c2e59c, #64b3f4); }
+        .gallery-item:nth-child(5) { background: linear-gradient(135deg, #ee9ca7, #ffdde1); }
+        .gallery-item:nth-child(6) { grid-column: span 2; background: linear-gradient(135deg, #f5af19, #f12711); }
+
+        .gallery-label {
+            position: absolute; bottom: 12px; left: 12px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px; font-weight: 600;
+        }
+
+        /* ===== TESTIMONI ===== */
+        .testi-section { background: var(--cokelat-tua); color: white; }
+
+        .testi-section .section-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--oranye-muda);
+        }
+
+        .testi-section .section-title { color: white; }
+        .testi-section .section-subtitle { color: rgba(255,255,255,0.5); }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testi-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .testi-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .testi-stars { margin-bottom: 16px; }
+        .testi-stars i { color: #F9E79F; font-size: 14px; }
+
+        .testi-card blockquote {
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.75);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .testi-author {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: var(--gradient-oranye);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 800;
+            color: white;
+            background: var(--oranye);
+        }
+
+        .testi-author-info h4 { font-size: 14px; font-weight: 700; }
+        .testi-author-info p { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+        /* ===== LOKASI ===== */
+        .location-section { background: var(--putih); }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .location-map {
+            height: 400px;
+            background: var(--krem);
+            border-radius: 20px;
+            border: 2px dashed #ddd;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 12px;
+            color: var(--abu);
+        }
+
+        .location-map i { font-size: 48px; color: var(--merah); }
+        .location-map p { font-size: 14px; }
+
+        .location-info {
+            display: flex; flex-direction: column; gap: 24px;
+        }
+
+        .location-card {
+            display: flex; gap: 16px;
+            padding: 20px;
+            background: var(--krem);
+            border-radius: 16px;
+        }
+
+        .location-card-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .icon-red { background: rgba(192, 57, 43, 0.1); color: var(--merah); }
+        .icon-green { background: rgba(39, 174, 96, 0.1); color: var(--hijau); }
+        .icon-orange { background: rgba(230, 126, 34, 0.1); color: var(--oranye); }
+
+        .location-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .location-card p { font-size: 14px; color: var(--abu); }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--merah) 0%, var(--merah-tua) 100%);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '🍛';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            top: -30px; right: -30px;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+            max-width: 480px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+        }
+
+        .btn-wa-lg {
+            padding: 18px 40px;
+            background: #25D366;
+            color: white;
+            border: none; border-radius: 56px;
+            font-size: 17px; font-weight: 800;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-wa-lg:hover { transform: translateY(-3px) scale(1.02); }
+
+        .btn-call {
+            padding: 18px 40px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 56px;
+            font-size: 17px; font-weight: 700;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 12px;
+            transition: all 0.3s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-call:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--cokelat-tua);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px; color: white;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand h3 span { color: var(--oranye-muda); }
+
+        .footer-brand p { font-size: 14px; line-height: 1.8; max-width: 320px; }
+
+        .footer-socials {
+            display: flex; gap: 12px; margin-top: 20px;
+        }
+
+        .footer-social {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social:hover {
+            background: var(--merah);
+            color: white;
+        }
+
+        .footer-col h4 {
+            font-size: 16px; color: white;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover { color: var(--oranye-muda); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 13px;
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-desc { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-plate { width: 260px; height: 260px; font-size: 110px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+            .testi-grid { grid-template-columns: repeat(2, 1fr); }
+            .location-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(6) { grid-column: span 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0;
+                width: 100%;
+                background: rgba(255, 249, 240, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 24px 30px;
+                gap: 16px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            .mobile-toggle { display: flex; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .menu-list-grid { grid-template-columns: 1fr; }
+            .testi-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-float-tag { display: none; }
+            .about-features { grid-template-columns: 1fr; }
+            .section { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">🍛</div>
+                <div class="nav-logo-text">
+                    <h1>Bu Siti</h1>
+                    <span>Masakan Sasak Lombok</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#menu">Menu Andalan</a></li>
+                <li><a href="#menu-lengkap">Menu Lengkap</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#lokasi">Lokasi</a></li>
+                <li><a href="#pesan" class="nav-cta">📲 Pesan Sekarang</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    🌶️ Masakan Khas Rumahan Sasak Lombok
+                </div>
+                <h1 class="hero-title">
+                    Rasa Kampung,<br>
+                    <span class="highlight">Resep Warisan</span><br>
+                    Turun-Temurun
+                </h1>
+                <p class="hero-desc">
+                    Warung Makan Bu Siti menyajikan masakan khas Sasak Lombok dengan resep asli turun-temurun. Dari Ayam Taliwang yang pedas nampol sampai Plecing Kangkung yang segar — semua dimasak dengan ❤️ setiap hari.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Bu%20Siti!%20Saya%20mau%20pesan%20makanan." class="btn-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Pesan via WhatsApp
+                    </a>
+                    <a href="#menu" class="btn-menu">
+                        <i class="fas fa-utensils"></i>
+                        Lihat Menu
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <h3>15+</h3>
+                        <p>Tahun Berdiri</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>50+</h3>
+                        <p>Menu Masakan</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>4.9★</h3>
+                        <p>Rating Google</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-plate">🍛</div>
+                <div class="hero-float-tag tag-1">
+                    🌶️ Pedasnya Pas!
+                </div>
+                <div class="hero-float-tag tag-2">
+                    ⭐ 100% Bumbu Asli Sasak
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TENTANG ===== -->
+    <section class="section about-section" id="tentang">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="about-img reveal">
+                    <div class="about-img-main">👩‍🍳</div>
+                    <div class="about-img-badge">
+                        <h4>15+</h4>
+                        <p>Tahun Melayani</p>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <div class="section-tag"><i class="fas fa-heart"></i> Cerita Kami</div>
+                    <h2>Berawal dari <span>Dapur Kecil</span> di Kampung</h2>
+                    <p>
+                        Tahun 2011, Bu Siti mulai berjualan nasi dan lauk khas Sasak dari dapur rumahnya di Mataram. Modalnya cuma satu: resep warisan nenek dan semangat untuk memperkenalkan masakan rumahan Lombok ke lebih banyak orang.
+                    </p>
+                    <p>
+                        Sekarang, Warung Bu Siti sudah jadi langganan warga sekitar, wisatawan, bahkan pejabat daerah. Semua karena satu prinsip: <strong>"Masak harus pakai hati, bumbu harus asli, dan pelanggan harus kenyang bahagia."</strong>
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Bumbu Racik Sendiri</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Bahan Segar Setiap Hari</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Tanpa MSG Berlebih</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Halal 100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MENU ANDALAN ===== -->
+    <section class="section menu-section" id="menu">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-fire"></i> Menu Andalan</div>
+                <h2 class="section-title">Yang Paling Dicari Pelanggan</h2>
+                <p class="section-subtitle">Enam menu favorit yang selalu ludes setiap hari. Pesan dari awal biar nggak kehabisan!</p>
+            </div>
+            <div class="menu-grid">
+
+                <!-- Ayam Taliwang -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-favorit">⭐ Favorit #1</span>
+                    <div class="menu-card-img bg-1">🍗</div>
+                    <div class="menu-card-body">
+                        <h3>Ayam Taliwang</h3>
+                        <p>Ayam kampung bakar dengan bumbu taliwang khas Lombok yang pedas gurih. Disajikan dengan plecing kangkung dan nasi hangat.</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 25K <span>/ porsi</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Ayam%20Taliwang" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plecing Kangkung -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-pedas">🌶️ Pedas Segar</span>
+                    <div class="menu-card-img bg-2">🥬</div>
+                    <div class="menu-card-body">
+                        <h3>Plecing Kangkung</h3>
+                        <p>Kangkung rebus segar dengan sambal plecing dari cabai rawit, tomat, dan terasi bakar. Segar, pedas, bikin nagih!</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 10K <span>/ porsi</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Plecing%20Kangkung" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bebalung -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-favorit">🔥 Best Seller</span>
+                    <div class="menu-card-img bg-3">🍲</div>
+                    <div class="menu-card-body">
+                        <h3>Bebalung</h3>
+                        <p>Sup iga sapi berkuah bening dengan bumbu rempah khas Sasak. Daging empuk, kuah gurih, cocok dimakan saat hujan.</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 30K <span>/ porsi</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Bebalung" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sate Rembiga -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-pedas">🌶️ Pedas Manis</span>
+                    <div class="menu-card-img bg-4">🥩</div>
+                    <div class="menu-card-body">
+                        <h3>Sate Rembiga</h3>
+                        <p>Sate daging sapi khas Rembiga dengan bumbu pedas manis yang meresap. Dibakar di atas arang kelapa, aromanya juara!</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 28K <span>/ 10 tusuk</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Sate%20Rembiga" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nasi Balap Puyung -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-baru">✨ Legendaris</span>
+                    <div class="menu-card-img bg-5">🍚</div>
+                    <div class="menu-card-body">
+                        <h3>Nasi Balap Puyung</h3>
+                        <p>Nasi putih dengan ayam suwir pedas, kacang kedelai, abon, dan sambal khas. Porsi kuli, harga kaki lima!</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 18K <span>/ porsi</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Nasi%20Balap%20Puyung" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayam Pelalah -->
+                <div class="menu-card reveal">
+                    <span class="menu-card-badge badge-baru">🆕 Baru!</span>
+                    <div class="menu-card-img bg-6">🍖</div>
+                    <div class="menu-card-body">
+                        <h3>Ayam Pelalah</h3>
+                        <p>Ayam goreng bumbu kuning khas Lombok yang renyah di luar, juicy di dalam. Disajikan dengan sambal matah segar.</p>
+                        <div class="menu-card-footer">
+                            <div class="menu-price">Rp 22K <span>/ porsi</span></div>
+                            <a href="https://wa.me/6281234567890?text=Saya%20mau%20pesan%20Ayam%20Pelalah" class="menu-order-btn" target="_blank">Pesan</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MENU LENGKAP ===== -->
+    <section class="section menu-list-section" id="menu-lengkap">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-book-open"></i> Daftar Menu</div>
+                <h2 class="section-title">Menu Lengkap & Harga</h2>
+                <p class="section-subtitle">Semua harga sudah termasuk nasi putih hangat. Bisa tambah nasi Rp 3.000.</p>
+            </div>
+            <div class="menu-list-grid reveal">
+
+                <div class="menu-category-title">🍗 Lauk Utama</div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍗</span>
+                        <div class="menu-list-info">
+                            <h4>Ayam Taliwang Bakar</h4>
+                            <p>Ayam kampung + plecing kangkung</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 25.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍖</span>
+                        <div class="menu-list-info">
+                            <h4>Ayam Pelalah Goreng</h4>
+                            <p>Bumbu kuning + sambal matah</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 22.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🥩</span>
+                        <div class="menu-list-info">
+                            <h4>Sate Rembiga</h4>
+                            <p>10 tusuk + lontong</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 28.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍲</span>
+                        <div class="menu-list-info">
+                            <h4>Bebalung (Sup Iga)</h4>
+                            <p>Iga sapi empuk + kuah rempah</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 30.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🐟</span>
+                        <div class="menu-list-info">
+                            <h4>Ikan Bakar Bumbu Sasak</h4>
+                            <p>Ikan segar harian + sambal</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 25.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍢</span>
+                        <div class="menu-list-info">
+                            <h4>Sate Bulayak</h4>
+                            <p>Sate ayam + bulayak (lontong khas)</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 20.000</span>
+                </div>
+
+                <div class="menu-category-title">🥬 Sayur & Sambal</div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🥬</span>
+                        <div class="menu-list-info">
+                            <h4>Plecing Kangkung</h4>
+                            <p>Sambal plecing + terasi bakar</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 10.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍆</span>
+                        <div class="menu-list-info">
+                            <h4>Beberuk Terong</h4>
+                            <p>Terong bakar + sambal kencur</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 8.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🌿</span>
+                        <div class="menu-list-info">
+                            <h4>Ares (Sayur Batang Pisang)</h4>
+                            <p>Masakan tradisional Sasak</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 12.000</span>
+                </div>
+
+                <div class="menu-category-title">🍚 Nasi & Paket</div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍚</span>
+                        <div class="menu-list-info">
+                            <h4>Nasi Balap Puyung</h4>
+                            <p>Nasi + ayam suwir + abon + sambal</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 18.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍱</span>
+                        <div class="menu-list-info">
+                            <h4>Paket Kenyang Berdua</h4>
+                            <p>2 nasi + ayam taliwang + plecing + es teh</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 55.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🎉</span>
+                        <div class="menu-list-info">
+                            <h4>Paket Rame-Rame (4 Orang)</h4>
+                            <p>4 nasi + 2 lauk + 2 sayur + 4 es teh</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 100.000</span>
+                </div>
+
+                <div class="menu-category-title">🥤 Minuman</div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🧊</span>
+                        <div class="menu-list-info">
+                            <h4>Es Teh Manis / Tawar</h4>
+                            <p>Teh seduh segar</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 4.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🍊</span>
+                        <div class="menu-list-info">
+                            <h4>Es Jeruk Peras</h4>
+                            <p>Jeruk asli peras</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 6.000</span>
+                </div>
+                <div class="menu-list-item">
+                    <div class="menu-list-left">
+                        <span class="menu-list-emoji">🥥</span>
+                        <div class="menu-list-info">
+                            <h4>Es Kelapa Muda</h4>
+                            <p>Kelapa asli + gula merah</p>
+                        </div>
+                    </div>
+                    <span class="menu-list-price">Rp 8.000</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALERI ===== -->
+    <section class="section gallery-section" id="galeri">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-camera"></i> Galeri</div>
+                <h2 class="section-title">Intip Dapur & Hidangan Kami</h2>
+                <p class="section-subtitle">Foto-foto suasana warung dan hidangan yang bikin ngiler.</p>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">🍗<span class="gallery-label">Ayam Taliwang di Atas Arang</span></div>
+                <div class="gallery-item">🥬<span class="gallery-label">Plecing Kangkung Segar</span></div>
+                <div class="gallery-item">🍲<span class="gallery-label">Bebalung Hangat</span></div>
+                <div class="gallery-item">🥩<span class="gallery-label">Sate Rembiga</span></div>
+                <div class="gallery-item">🍚<span class="gallery-label">Nasi Balap Puyung</span></div>
+                <div class="gallery-item">👩‍🍳<span class="gallery-label">Bu Siti di Dapur</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONI ===== -->
+    <section class="section testi-section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> Testimoni</div>
+                <h2 class="section-title">Kata Pelanggan Kami</h2>
+                <p class="section-subtitle">Ribuan pelanggan sudah membuktikan kelezatan masakan Bu Siti.</p>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card reveal">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Ayam Taliwangnya juara banget! Pedasnya pas, dagingnya empuk. Sudah 3 tahun jadi langganan, nggak pernah kecewa. Plecing kangkungnya juga segar banget!"</blockquote>
+                    <div class="testi-author">
+                        <div class="testi-avatar">H</div>
+                        <div class="testi-author-info">
+                            <h4>Haji Ahmad</h4>
+                            <p>Pelanggan Tetap, Mataram</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Saya wisatawan dari Jakarta, nemu warung ini dari rekomendasi teman. Bebalungnya luar biasa! Kuahnya gurih, iganya empuk. Worth it banget mampir ke sini."</blockquote>
+                    <div class="testi-author">
+                        <div class="testi-avatar">D</div>
+                        <div class="testi-author-info">
+                            <h4>Diana Putri</h4>
+                            <p>Wisatawan, Jakarta</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>"Nasi Balap Puyungnya porsi kuli, harga kaki lima! Saya anak kos, ini jadi andalan tiap akhir bulan. Sambalnya nampol tapi bikin nagih. Terima kasih Bu Siti! 🙏"</blockquote>
+                    <div class="testi-author">
+                        <div class="testi-avatar">R</div>
+                        <div class="testi-author-info">
+                            <h4>Rizky Maulana</h4>
+                            <p>Mahasiswa, Unram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LOKASI ===== -->
+    <section class="section location-section" id="lokasi">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-map-marker-alt"></i> Kunjungi Kami</div>
+                <h2 class="section-title">Lokasi & Jam Buka</h2>
+                <p class="section-subtitle">Datang langsung ke warung atau pesan antar via WhatsApp.</p>
+            </div>
+            <div class="location-grid reveal">
+                <div class="location-map">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p><strong>Peta Google Maps</strong></p>
+                    <p>Ganti bagian ini dengan embed Google Maps</p>
+                </div>
+                <div class="location-info">
+                    <div class="location-card">
+                        <div class="location-card-icon icon-red"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jl. Pejanggik No. 45, Kelurahan Cakranegara, Kec. Cakranegara, Kota Mataram, NTB 83238</p>
+                        </div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-card-icon icon-green"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Jam Buka</h4>
+                            <p>Senin - Minggu: 08.00 - 21.00 WITA<br>
+                            <strong>Jumat:</strong> 08.00 - 11.00 & 13.00 - 21.00</p>
+                        </div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-card-icon icon-orange"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h4>Pesan Antar</h4>
+                            <p>WhatsApp: +62 812-3456-7890<br>
+                            Gratis ongkir area Mataram (min. Rp 50.000)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section" id="pesan">
+        <div class="section-inner">
+            <h2>Laper? Pesan Sekarang! 🍛</h2>
+            <p>Cukup chat WhatsApp, sebutkan menu yang dimau, dan makanan siap diantar atau diambil di warung.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/6281234567890?text=Halo%20Bu%20Siti!%20Saya%20mau%20pesan%20makanan." class="btn-wa-lg" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Pesan via WhatsApp
+                </a>
+                <a href="tel:+6281234567890" class="btn-call">
+                    <i class="fas fa-phone"></i>
+                    Telepon Langsung
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="section-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Warung <span>Bu Siti</span></h3>
+                    <p>Masakan khas rumahan Sasak Lombok dengan resep warisan turun-temurun. Melayani dengan hati sejak 2011. 🌶️</p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#menu">Ayam Taliwang</a></li>
+                        <li><a href="#menu">Plecing Kangkung</a></li>
+                        <li><a href="#menu">Bebalung</a></li>
+                        <li><a href="#menu">Sate Rembiga</a></li>
+                        <li><a href="#menu">Nasi Balap Puyung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="#">📍 Cakranegara, Mataram</a></li>
+                        <li><a href="tel:+6281234567890">📞 +62 812-3456-7890</a></li>
+                        <li><a href="#">🕐 08.00 - 21.00 WITA</a></li>
+                        <li><a href="#">📧 warunghbusiti@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Warung Makan Bu Siti. Masakan Khas Sasak Lombok. Dibuat dengan ❤️ oleh <strong>DIGITAL PRO</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            const href = anchor.getAttribute('href');
+            if (href === '#') return;
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
