@@ -25,7 +25,6 @@
             --white: #FFFFFF;
             --shadow: 0 6px 24px rgba(62,39,35,0.08);
             --shadow-lg: 0 12px 40px rgba(62,39,35,0.12);
-            /* ✅ Jarak kiri-kanan layar — minimal! Ubah angka ini sesuai selera */
             --side: 20px;
         }
 
@@ -58,7 +57,6 @@
             box-shadow: 0 1px 12px rgba(62,39,35,0.06);
         }
 
-        /* ✅ FULL WIDTH — cuma padding kiri-kanan 20px */
         .nav-container {
             width: 100%;
             padding: 0 var(--side);
@@ -88,6 +86,10 @@
 
         .nav-logo-text span { color: var(--red); }
 
+        .nav-right {
+            display: flex; align-items: center; gap: 16px;
+        }
+
         .nav-links {
             display: flex; align-items: center; gap: 24px;
             list-style: none;
@@ -114,6 +116,37 @@
         }
 
         .nav-cta:hover { background: var(--green-dark); }
+
+        /* ✅ Tombol Keranjang di Navbar */
+        .cart-btn {
+            position: relative;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--red);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 12px rgba(192,57,43,0.25);
+        }
+
+        .cart-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+        .cart-count {
+            position: absolute;
+            top: -5px; right: -5px;
+            min-width: 18px; height: 18px;
+            padding: 0 5px;
+            background: var(--green);
+            border-radius: 50px;
+            font-size: 10px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cart-count.bump { animation: bump 0.3s; }
+        @keyframes bump { 50% { transform: scale(1.4); } }
 
         .mobile-toggle {
             display: none;
@@ -148,7 +181,6 @@
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233E2723' fill-opacity='1'%3E%3Cpath d='M20 20h2v2h-2zM10 10h2v2h-2zM30 30h2v2h-2z'/%3E%3C/g%3E%3C/svg%3E");
         }
 
-        /* ✅ FULL WIDTH */
         .hero-container {
             width: 100%;
             padding: 90px var(--side) 50px;
@@ -178,10 +210,7 @@
             margin-bottom: 14px;
         }
 
-        .hero-title .highlight {
-            color: var(--red);
-            position: relative;
-        }
+        .hero-title .highlight { color: var(--red); position: relative; }
 
         .hero-title .highlight::after {
             content: '';
@@ -246,9 +275,7 @@
         .hero-visual { position: relative; display: flex; justify-content: center; }
 
         .hero-img-main {
-            width: 100%;
-            max-width: 600px;
-            height: 460px;
+            width: 100%; max-width: 600px; height: 460px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
@@ -302,16 +329,12 @@
         /* ===== SECTION COMMON ===== */
         .section { padding: 50px 0; }
 
-        /* ✅ FULL WIDTH */
         .section-container {
             width: 100%;
             padding: 0 var(--side);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 36px;
-        }
+        .section-header { text-align: center; margin-bottom: 36px; }
 
         .section-tag {
             display: inline-flex; align-items: center; gap: 5px;
@@ -342,7 +365,6 @@
         /* ===== MENU ===== */
         .menu-section { background: white; }
 
-        /* ✅ AUTO-FIT: kartu menyesuaikan lebar layar (3-5 kolom di layar lebar) */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -414,6 +436,7 @@
             color: var(--red);
         }
 
+        /* ✅ Tombol Pesan = tambah ke keranjang */
         .menu-order-btn {
             padding: 7px 16px;
             background: var(--green);
@@ -421,10 +444,11 @@
             border-radius: 50px;
             font-size: 11px; font-weight: 600;
             cursor: pointer; transition: all 0.3s;
-            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex; align-items: center; gap: 6px;
         }
 
-        .menu-order-btn:hover { background: var(--green-dark); }
+        .menu-order-btn:hover { background: var(--green-dark); transform: scale(1.05); }
 
         /* ===== ABOUT ===== */
         .about-section { background: var(--cream); }
@@ -715,6 +739,323 @@
             100% { box-shadow: 0 0 0 0 rgba(39,174,96,0); }
         }
 
+        /* ================================================
+           ✅ SISTEM KERANJANG PESANAN (BARU!)
+           ================================================ */
+        .cart-overlay {
+            position: fixed; inset: 0;
+            background: rgba(62,39,35,0.45);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1100;
+        }
+
+        .cart-overlay.show { opacity: 1; pointer-events: auto; }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: -440px;
+            width: 420px; max-width: 94vw;
+            height: 100vh;
+            background: white;
+            z-index: 1200;
+            display: flex; flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+            transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .cart-drawer.open { right: 0; }
+
+        .cart-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0e8dd;
+            background: var(--cream);
+        }
+
+        .cart-header h3 { font-size: 18px; color: var(--brown); }
+
+        .cart-close {
+            width: 32px; height: 32px;
+            border: none; border-radius: 50%;
+            background: rgba(192,57,43,0.08);
+            color: var(--red);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-close:hover { background: var(--red); color: white; }
+
+        .cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+        }
+
+        .cart-step.hidden { display: none; }
+
+        .order-code-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 14px;
+            background: var(--cream-dark);
+            border: 1px dashed var(--orange);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--brown-light);
+            margin-bottom: 14px;
+        }
+
+        .order-code-chip strong { color: var(--red); letter-spacing: 0.5px; }
+
+        .cart-empty {
+            text-align: center;
+            padding: 30px 10px;
+            color: var(--gray);
+        }
+
+        .cart-empty i { font-size: 40px; color: #ddd; margin-bottom: 10px; }
+        .cart-empty p { font-size: 13px; }
+
+        .cart-item {
+            display: flex; gap: 12px; align-items: center;
+            padding: 12px;
+            background: var(--cream);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .cart-item img {
+            width: 54px; height: 54px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info { flex: 1; min-width: 0; }
+
+        .cart-item-info h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 700;
+            color: var(--brown);
+        }
+
+        .cart-item-info .ci-price { font-size: 11px; color: var(--gray); }
+
+        .cart-item-info .ci-sub {
+            font-size: 12px; color: var(--red); font-weight: 700;
+        }
+
+        .qty-box {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 4px;
+        }
+
+        .qty-row { display: flex; align-items: center; gap: 8px; }
+
+        .qty-btn {
+            width: 24px; height: 24px;
+            border: none; border-radius: 50%;
+            background: white;
+            color: var(--red);
+            font-size: 13px; font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover { background: var(--red); color: white; }
+
+        .qty-num { font-size: 13px; font-weight: 700; min-width: 16px; text-align: center; }
+
+        .qty-del {
+            border: none; background: none;
+            color: #ccc; font-size: 11px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .qty-del:hover { color: var(--red); }
+
+        .cart-total-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 4px;
+            margin-top: 6px;
+            border-top: 2px dashed #e8ddcc;
+            font-size: 14px; font-weight: 600;
+            color: var(--brown);
+        }
+
+        .cart-total-row strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--red);
+        }
+
+        .form-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 700;
+            color: var(--brown);
+            margin: 14px 0 10px;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .cart-form input, .cart-form textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #eee3d5;
+            border-radius: 10px;
+            background: var(--cream);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--brown);
+            margin-bottom: 10px;
+            outline: none;
+            transition: border 0.3s;
+            resize: none;
+        }
+
+        .cart-form input:focus, .cart-form textarea:focus { border-color: var(--red); }
+
+        .cart-form input.error, .cart-form textarea.error {
+            border-color: var(--red);
+            background: #fdecea;
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 13px;
+            border: none; border-radius: 50px;
+            background: var(--red);
+            color: white;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 14px rgba(192,57,43,0.3);
+        }
+
+        .btn-confirm:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+        /* Step Konfirmasi */
+        .confirm-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 12px;
+        }
+
+        .sum-card {
+            background: var(--cream);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .sum-code {
+            font-size: 12px; color: var(--brown-light);
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e0d5c2;
+            margin-bottom: 10px;
+        }
+
+        .sum-code strong { color: var(--red); }
+
+        .sum-row {
+            display: flex; justify-content: space-between;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--brown);
+            margin-bottom: 6px;
+        }
+
+        .sum-row em { color: var(--gray); font-style: normal; font-size: 12px; }
+        .sum-row strong { color: var(--red); white-space: nowrap; }
+
+        .sum-total {
+            display: flex; justify-content: space-between;
+            margin-top: 10px; padding-top: 10px;
+            border-top: 2px dashed #e0d5c2;
+            font-size: 14px; font-weight: 700;
+            color: var(--brown);
+        }
+
+        .sum-total strong { color: var(--red); font-size: 17px; }
+
+        .sum-cust {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed #e0d5c2;
+            font-size: 12.5px;
+            color: var(--brown-light);
+        }
+
+        .sum-cust p { margin-bottom: 3px; }
+
+        .sum-note {
+            font-size: 11.5px;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .btn-send {
+            width: 100%;
+            padding: 14px;
+            border: none; border-radius: 50px;
+            background: var(--green);
+            color: white;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 14px rgba(39,174,96,0.3);
+            margin-bottom: 10px;
+        }
+
+        .btn-send:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+        .btn-back {
+            width: 100%;
+            padding: 11px;
+            border: 1.5px solid #ddd; border-radius: 50px;
+            background: transparent;
+            color: var(--gray);
+            font-size: 13px; font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover { border-color: var(--brown); color: var(--brown); }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 88px; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--brown);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 13px; font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 1300;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            white-space: nowrap;
+            max-width: 92vw;
+        }
+
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
         /* ===== REVEAL ===== */
         .reveal {
             opacity: 0;
@@ -763,15 +1104,21 @@
                 <div class="nav-logo-icon">🍛</div>
                 <div class="nav-logo-text">Bu <span>Siti</span></div>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#tentang">Tentang</a></li>
-                <li><a href="#testimoni">Testimoni</a></li>
-                <li><a href="#lokasi">Lokasi</a></li>
-                <li><a href="https://wa.me/6281234567890?text=Halo%20Bu%20Siti!%20Saya%20mau%20pesan." class="nav-cta" target="_blank"><i class="fab fa-whatsapp"></i> Pesan</a></li>
-            </ul>
-            <div class="mobile-toggle" id="mobileToggle">
-                <span></span><span></span><span></span>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#testimoni">Testimoni</a></li>
+                    <li><a href="#lokasi">Lokasi</a></li>
+                </ul>
+                <!-- ✅ Tombol Keranjang -->
+                <button class="cart-btn" id="cartBtn" title="Keranjang Pesanan">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </div>
     </nav>
@@ -791,11 +1138,11 @@
                     Dari dapur Bu Siti untuk Anda. Ayam Taliwang, Sate Rembiga, Plecing Kangkung — dimasak fresh setiap hari dengan resep turun-temurun.
                 </p>
                 <div class="hero-buttons">
-                    <a href="https://wa.me/6281234567890?text=Halo%20Bu%20Siti!%20Saya%20mau%20pesan." class="btn-wa" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                    <a href="#menu" class="btn-wa">
+                        <i class="fas fa-utensils"></i> Pesan Sekarang
                     </a>
                     <a href="#menu" class="btn-menu">
-                        <i class="fas fa-utensils"></i> Lihat Menu
+                        <i class="fas fa-book-open"></i> Lihat Menu
                     </a>
                 </div>
                 <div class="hero-stats">
@@ -835,7 +1182,7 @@
             <div class="section-header reveal">
                 <div class="section-tag">🍽️ Menu Kami</div>
                 <h2 class="section-title">Masakan Khas Sasak</h2>
-                <p class="section-subtitle">Dimasak fresh setiap hari dengan bumbu racikan sendiri.</p>
+                <p class="section-subtitle">Klik <strong>+ Pesan</strong> untuk memasukkan menu ke keranjang, lalu konfirmasi & kirim pesanan via WhatsApp.</p>
             </div>
             <div class="menu-grid">
                 <div class="menu-card reveal">
@@ -848,7 +1195,7 @@
                         <p>Ayam kampung bakar bumbu khas Taliwang, pedas gurih. + Plecing kangkung.</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 35K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Ayam%20Taliwang" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="taliwang"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -862,7 +1209,7 @@
                         <p>Sate sapi khas Lombok, bumbu manis pedas meresap. 10 tusuk/porsi.</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 30K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Sate%20Rembiga" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="rembiga"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -876,7 +1223,7 @@
                         <p>Nasi + ayam suwir pedas, telur, kacang, sambal khas. Porsi kuli!</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 20K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Nasi%20Balap" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="nasibalap"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -890,7 +1237,7 @@
                         <p>Kangkung rebus + sambal tomat khas Lombok. Pedas segar, bikin nagih.</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 12K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Plecing%20Kangkung" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="plecing"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -903,7 +1250,7 @@
                         <p>Terong bakar + sambal khas Sasak. Smoky, pedas, gurih.</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 10K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Beberuk%20Terong" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="beberuk"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -917,7 +1264,7 @@
                         <p>Sate ayam + lontong bulayak khas Lombok, bumbu kacang spesial.</p>
                         <div class="menu-card-footer">
                             <span class="menu-price">Rp 25K</span>
-                            <a href="https://wa.me/6281234567890?text=Pesan%20Sate%20Bulayak" class="menu-order-btn" target="_blank">Pesan</a>
+                            <button class="menu-order-btn" data-id="bulayak"><i class="fas fa-plus"></i> Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -939,7 +1286,7 @@
                     </div>
                 </div>
                 <div class="about-content reveal">
-                    <div class="section-tag">👩‍🍳 Tentang Kami</div>
+                    <div class="section-tag">👩🍳 Tentang Kami</div>
                     <h2>Cerita di Balik Dapur Bu Siti</h2>
                     <p>Berawal dari dapur kecil di rumah pada 2011, Bu Siti mulai memasak masakan khas Sasak untuk tetangga. Berkat cita rasa autentik dan bumbu racikan sendiri, warung ini kini jadi langganan ratusan pelanggan.</p>
                     <p>Semua resep warisan turun-temurun dari nenek di Lombok. Bahan segar pilihan, bumbu diulek manual setiap pagi — bukan bumbu instan.</p>
@@ -1057,10 +1404,10 @@
     <section class="cta-section">
         <div class="section-container reveal">
             <h2>Laper? Pesan Sekarang! 🍛</h2>
-            <p>Masak fresh, porsi banyak, harga bersahabat. Chat WhatsApp, langsung diantar.</p>
+            <p>Masak fresh, porsi banyak, harga bersahabat. Pilih menu, masukkan keranjang, dan pesanan langsung masuk WhatsApp kami.</p>
             <div class="cta-buttons">
-                <a href="https://wa.me/6281234567890?text=Halo%20Bu%20Siti!%20Mau%20pesan%20makanan." class="cta-btn-wa" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                <a href="#menu" class="cta-btn-wa">
+                    <i class="fas fa-utensils"></i> Pilih Menu
                 </a>
                 <a href="tel:+6281234567890" class="cta-btn-call">
                     <i class="fas fa-phone"></i> Telepon
@@ -1106,7 +1453,64 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- ===== ✅ KERANJANG PESANAN (DRAWER) ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>🛒 Keranjang Pesanan</h3>
+            <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body">
+
+            <!-- STEP 1: Isi Keranjang + Data Pemesan -->
+            <div class="cart-step" id="stepCart">
+                <div class="order-code-chip">📋 Kode Order: <strong id="orderCode">-</strong></div>
+
+                <div id="cartItems"></div>
+
+                <div class="cart-empty" id="cartEmpty">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Keranjang masih kosong.<br>Yuk pilih menu favoritmu! 😋</p>
+                </div>
+
+                <div class="cart-total-row">
+                    <span>Total Pesanan</span>
+                    <strong id="cartTotal">Rp 0</strong>
+                </div>
+
+                <div class="cart-form">
+                    <h4 class="form-title"><i class="fas fa-user-edit"></i> Data Pemesan</h4>
+                    <input type="text" id="custName" placeholder="Nama Pemesan *">
+                    <textarea id="custAddress" rows="2" placeholder="Alamat Pemesan *"></textarea>
+                    <input type="tel" id="custPhone" placeholder="No. WA Pemesan *">
+                </div>
+
+                <button class="btn-confirm" id="btnConfirm">
+                    <i class="fas fa-clipboard-check"></i> Konfirmasi Pesanan
+                </button>
+            </div>
+
+            <!-- STEP 2: Ringkasan + Kirim -->
+            <div class="cart-step hidden" id="stepConfirm">
+                <div class="confirm-title">✅ Periksa Kembali Pesanan Anda</div>
+                <div id="confirmSummary"></div>
+                <p class="sum-note">Pesanan akan dikirim ke WhatsApp Bu Siti setelah Anda menekan tombol di bawah.</p>
+                <button class="btn-send" id="btnSend">
+                    <i class="fab fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+                </button>
+                <button class="btn-back" id="btnBack">
+                    <i class="fas fa-arrow-left"></i> Kembali Ubah Pesanan
+                </button>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
     <script>
+        // ===== NAVBAR & UI DASAR =====
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
 
@@ -1136,6 +1540,240 @@
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // =====================================================
+        // ✅ SISTEM KERANJANG PESANAN
+        // =====================================================
+        const WA_NUMBER = '6281234567890'; // <-- Ganti dengan nomor WA Bu Siti
+
+        const MENU_DATA = {
+            taliwang:  { name: 'Ayam Taliwang',    price: 35000, img: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=100&q=60' },
+            rembiga:   { name: 'Sate Rembiga',     price: 30000, img: 'https://images.unsplash.com/photo-1529563021893-cc83c992d75d?auto=format&fit=crop&w=100&q=60' },
+            nasibalap: { name: 'Nasi Balap',       price: 20000, img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=100&q=60' },
+            plecing:   { name: 'Plecing Kangkung', price: 12000, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=100&q=60' },
+            beberuk:   { name: 'Beberuk Terong',   price: 10000, img: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=100&q=60' },
+            bulayak:   { name: 'Sate Bulayak',     price: 25000, img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=100&q=60' }
+        };
+
+        let cart = {}; // { idMenu: jumlah }
+        let orderCode = generateOrderCode();
+
+        // Element refs
+        const cartDrawer  = document.getElementById('cartDrawer');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartEmptyEl = document.getElementById('cartEmpty');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const cartCountEl = document.getElementById('cartCount');
+        const orderCodeEl = document.getElementById('orderCode');
+        const stepCart    = document.getElementById('stepCart');
+        const stepConfirm = document.getElementById('stepConfirm');
+        const summaryEl   = document.getElementById('confirmSummary');
+        const custName    = document.getElementById('custName');
+        const custAddress = document.getElementById('custAddress');
+        const custPhone   = document.getElementById('custPhone');
+        const toastEl     = document.getElementById('toast');
+
+        orderCodeEl.textContent = orderCode;
+
+        // Format Rupiah
+        const rupiah = n => 'Rp ' + n.toLocaleString('id-ID');
+
+        // Generate Kode Order unik: BS-20260820-AB12
+        function generateOrderCode() {
+            const d = new Date();
+            const ymd = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+            const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+            return `BS-${ymd}-${rand}`;
+        }
+
+        // Toast notification
+        let toastTimer;
+        function showToast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+        }
+
+        // Buka / tutup drawer
+        function openDrawer()  { cartDrawer.classList.add('open');  cartOverlay.classList.add('show'); }
+        function closeDrawer() { cartDrawer.classList.remove('open'); cartOverlay.classList.remove('show'); }
+
+        document.getElementById('cartBtn').addEventListener('click', openDrawer);
+        document.getElementById('cartClose').addEventListener('click', closeDrawer);
+        cartOverlay.addEventListener('click', closeDrawer);
+
+        // Hitung total & jumlah item
+        function calcCart() {
+            let total = 0, count = 0;
+            for (const id in cart) {
+                total += MENU_DATA[id].price * cart[id];
+                count += cart[id];
+            }
+            return { total, count };
+        }
+
+        // Render isi keranjang
+        function renderCart() {
+            const ids = Object.keys(cart);
+            const { total, count } = calcCart();
+
+            if (ids.length === 0) {
+                cartItemsEl.innerHTML = '';
+                cartEmptyEl.style.display = 'block';
+            } else {
+                cartEmptyEl.style.display = 'none';
+                cartItemsEl.innerHTML = ids.map(id => {
+                    const m = MENU_DATA[id];
+                    const qty = cart[id];
+                    return `
+                    <div class="cart-item">
+                        <img src="${m.img}" alt="${m.name}">
+                        <div class="cart-item-info">
+                            <h4>${m.name}</h4>
+                            <span class="ci-price">${rupiah(m.price)} / porsi</span><br>
+                            <span class="ci-sub">${qty} x = ${rupiah(m.price * qty)}</span>
+                        </div>
+                        <div class="qty-box">
+                            <div class="qty-row">
+                                <button class="qty-btn" onclick="changeQty('${id}', -1)">−</button>
+                                <span class="qty-num">${qty}</span>
+                                <button class="qty-btn" onclick="changeQty('${id}', 1)">+</button>
+                            </div>
+                            <button class="qty-del" onclick="removeItem('${id}')"><i class="fas fa-trash"></i> hapus</button>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+
+            cartTotalEl.textContent = rupiah(total);
+            cartCountEl.textContent = count;
+        }
+
+        // Tambah ke keranjang (tombol + Pesan di kartu menu)
+        function addToCart(id) {
+            cart[id] = (cart[id] || 0) + 1;
+            renderCart();
+            openDrawer();
+            showToast(`✅ ${MENU_DATA[id].name} masuk keranjang!`);
+            cartCountEl.classList.remove('bump');
+            void cartCountEl.offsetWidth; // reflow untuk restart animasi
+            cartCountEl.classList.add('bump');
+        }
+
+        // Ubah jumlah +/-
+        function changeQty(id, delta) {
+            cart[id] += delta;
+            if (cart[id] <= 0) delete cart[id];
+            renderCart();
+        }
+
+        // Hapus item
+        function removeItem(id) {
+            delete cart[id];
+            renderCart();
+            showToast('🗑️ Menu dihapus dari keranjang');
+        }
+
+        // Tombol + Pesan pada setiap kartu menu
+        document.querySelectorAll('.menu-order-btn').forEach(btn => {
+            btn.addEventListener('click', () => addToCart(btn.dataset.id));
+        });
+
+        // STEP 1 -> STEP 2 : Konfirmasi Pesanan
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            if (Object.keys(cart).length === 0) {
+                showToast('🛒 Keranjang masih kosong!');
+                return;
+            }
+
+            // Validasi data pemesan
+            let valid = true;
+            [custName, custAddress, custPhone].forEach(f => {
+                if (!f.value.trim()) { f.classList.add('error'); valid = false; }
+                else f.classList.remove('error');
+            });
+            if (!valid) {
+                showToast('⚠️ Lengkapi nama, alamat & No. WA!');
+                return;
+            }
+
+            // Bangun ringkasan
+            const { total } = calcCart();
+            let no = 1, rows = '';
+            for (const id in cart) {
+                const m = MENU_DATA[id];
+                const qty = cart[id];
+                rows += `<div class="sum-row"><span>${no}. ${m.name} <em>x${qty}</em></span><strong>${rupiah(m.price * qty)}</strong></div>`;
+                no++;
+            }
+
+            summaryEl.innerHTML = `
+                <div class="sum-card">
+                    <div class="sum-code">📋 Kode Order: <strong>${orderCode}</strong></div>
+                    ${rows}
+                    <div class="sum-total"><span>Total Pesanan</span><strong>${rupiah(total)}</strong></div>
+                    <div class="sum-cust">
+                        <p>👤 <strong>${custName.value.trim()}</strong></p>
+                        <p>📍 ${custAddress.value.trim()}</p>
+                        <p>📱 ${custPhone.value.trim()}</p>
+                    </div>
+                </div>`;
+
+            stepCart.classList.add('hidden');
+            stepConfirm.classList.remove('hidden');
+        });
+
+        // Kembali ke step 1
+        document.getElementById('btnBack').addEventListener('click', () => {
+            stepConfirm.classList.add('hidden');
+            stepCart.classList.remove('hidden');
+        });
+
+        // STEP 2 -> KIRIM ke WhatsApp
+        document.getElementById('btnSend').addEventListener('click', () => {
+            const { total } = calcCart();
+
+            // Susun pesan WhatsApp
+            let msg = `*PESANAN BARU - WARUNG BU SITI* 🍛\n`;
+            msg += `━━━━━━━━━━━━━━━━━━\n`;
+            msg += `📋 Kode Order: *${orderCode}*\n\n`;
+            msg += `*Rincian Menu Pesanan:*\n`;
+            let no = 1;
+            for (const id in cart) {
+                const m = MENU_DATA[id];
+                const qty = cart[id];
+                msg += `${no}. ${m.name}\n    ${qty} x ${rupiah(m.price)} = *${rupiah(m.price * qty)}*\n`;
+                no++;
+            }
+            msg += `\n💰 *TOTAL PESANAN: ${rupiah(total)}*\n`;
+            msg += `━━━━━━━━━━━━━━━━━━\n`;
+            msg += `👤 Nama Pemesan: ${custName.value.trim()}\n`;
+            msg += `📍 Alamat: ${custAddress.value.trim()}\n`;
+            msg += `📱 No. WA: ${custPhone.value.trim()}\n\n`;
+            msg += `Mohon dikonfirmasi ya Bu. Terima kasih! 🙏`;
+
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            // Reset keranjang & buat kode order baru
+            cart = {};
+            renderCart();
+            orderCode = generateOrderCode();
+            orderCodeEl.textContent = orderCode;
+            custName.value = custAddress.value = custPhone.value = '';
+            stepConfirm.classList.add('hidden');
+            stepCart.classList.remove('hidden');
+            closeDrawer();
+            showToast('🚀 Pesanan terkirim ke WhatsApp!');
+        });
+
+        // Hapus tanda error saat user mengetik
+        [custName, custAddress, custPhone].forEach(f => {
+            f.addEventListener('input', () => f.classList.remove('error'));
+        });
+
+        renderCart();
     </script>
 </body>
 </html>
